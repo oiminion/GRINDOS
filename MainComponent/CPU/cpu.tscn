@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2lbf6i01hau7"]
+
+[ext_resource type="Texture2D" uid="uid://bmgq56c4breod" path="res://img/White_square.png" id="1_fa4a8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umpus"]
+
+[node name="CPU" type="StaticBody2D"]
+disable_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_umpus")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.201527, 0.201527, 0.201527, 1)
+texture = ExtResource("1_fa4a8")
