@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b38ctrmsfy4v0"]
+
+[ext_resource type="PackedScene" uid="uid://c2lbf6i01hau7" path="res://MainComponent/CPU/cpu.tscn" id="1_2gdhm"]
+
+[node name="Main" type="Node2D"]
+
+[node name="CPU" parent="." instance=ExtResource("1_2gdhm")]
