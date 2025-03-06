@@ -1,7 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://b38ctrmsfy4v0"]
+[gd_scene load_steps=5 format=3 uid="uid://b38ctrmsfy4v0"]
 
 [ext_resource type="PackedScene" uid="uid://c2lbf6i01hau7" path="res://MainComponent/CPU/cpu.tscn" id="1_2gdhm"]
+[ext_resource type="PackedScene" uid="uid://cacsol6mq74a" path="res://Auxiliar/cable.tscn" id="2_7mhkn"]
+[ext_resource type="PackedScene" uid="uid://dnnx2xs4dw1pe" path="res://MainComponent/RAM/ram_fixo.tscn" id="3_tpbwl"]
+[ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="4_io58n"]
 
 [node name="Main" type="Node2D"]
 
 [node name="CPU" parent="." instance=ExtResource("1_2gdhm")]
+position = Vector2(95, 110)
+
+[node name="CableCPU" parent="." instance=ExtResource("2_7mhkn")]
+position = Vector2(180, 114)
+
+[node name="CableDisk" parent="." instance=ExtResource("2_7mhkn")]
+position = Vector2(407, 105)
+
+[node name="RAM_fixo" parent="." instance=ExtResource("3_tpbwl")]
+position = Vector2(275, 107)
+
+[node name="Disk" parent="." instance=ExtResource("4_io58n")]
+position = Vector2(523, 103)

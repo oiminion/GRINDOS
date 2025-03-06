@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cacsol6mq74a"]
+
+[ext_resource type="Texture2D" uid="uid://bmgq56c4breod" path="res://img/White_square.png" id="1_32rrn"]
+
+[node name="Cable" type="Sprite2D"]
+modulate = Color(0.0383972, 0.0383972, 0.0383972, 1)
+z_index = -1
+scale = Vector2(1, 0.15)
+texture = ExtResource("1_32rrn")

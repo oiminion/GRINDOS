@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dffwl868m3vwl"]
+
+[ext_resource type="Script" uid="uid://chdhoydbrtb57" path="res://MainComponent/RAM/ram.gd" id="1_i4asa"]
+[ext_resource type="Texture2D" uid="uid://bmgq56c4breod" path="res://img/White_square.png" id="1_ws0ac"]
+
+[node name="RAM" type="Node2D"]
+script = ExtResource("1_i4asa")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.2, 0.2, 1)
+position = Vector2(32, 64)
+scale = Vector2(1, 2)
+texture = ExtResource("1_ws0ac")

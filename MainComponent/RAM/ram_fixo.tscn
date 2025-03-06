@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnnx2xs4dw1pe"]
+
+[ext_resource type="PackedScene" uid="uid://dffwl868m3vwl" path="res://MainComponent/RAM/ram.tscn" id="1_3oakt"]
+[ext_resource type="Script" uid="uid://ddw7u0hhrwudd" path="res://MainComponent/RAM/ram_fixo.gd" id="2_0vous"]
+
+[node name="RAM_fixo" instance=ExtResource("1_3oakt")]
+script = ExtResource("2_0vous")
+segmentation_size = 5.0
+segmentation_quantity = null
