@@ -1,0 +1,26 @@
+extends Node2D
+
+@export var max_capacity: float = 50
+
+@export var Data: float = 15
+@export var Apps: float = 10
+@export var So: float = 5
+
+@export var connected: Module = null
+
+
+
+func Calculate_Module_Size(value: float) -> float:
+	return $Background.scale.y / max_capacity * value
+
+func Update_Ui() -> void:
+	$Data.scale.y = Calculate_Module_Size(Data)
+	$Apps.scale.y = Calculate_Module_Size(Apps)
+	$SO.scale.y = Calculate_Module_Size(So)
+	
+	$Data.position.y = $Data.scale.y * 32
+	$Apps.position.y = $Data.position.y + $Data.scale.y * 32 + $Apps.scale.y * 32 
+	$SO.position.y = $Background.scale.y * 2 * 32 - ($SO.scale.y * 32)
+
+func _ready() -> void:
+	Update_Ui()
