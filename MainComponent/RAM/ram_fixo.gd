@@ -3,6 +3,8 @@ extends "res://MainComponent/RAM/ram.gd"
 @export var segmentation_size: float = 5
 @export var segmentation_quantity: int = max_capacity / segmentation_size
 
+signal Module_Selected(module: Module)
+
 var processes: Array
 
 var process_scene: PackedScene = preload("res://Auxiliar/process.tscn")
@@ -19,7 +21,6 @@ func Change_Segmentation_Size(value: float) -> void:
 
 func Add_Capacity(value: float) -> void:
 	max_capacity += value
-	Update_Size()
 	Update_Segmentation_Quantity()
 
 func Initialize_Ram() -> void:
@@ -37,5 +38,7 @@ func Initialize_Ram() -> void:
 
 func _ready() -> void:
 	segmentation = "fixo"
-	Update_Size()
 	Initialize_Ram()
+
+func Process_Selected(module: Module) -> void:
+	Module_Selected.emit(module)

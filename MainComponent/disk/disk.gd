@@ -1,5 +1,7 @@
 extends Node2D
 
+signal Module_Selected(module: Module)
+
 @export var max_capacity: float = 50
 
 @export var Data: float = 15
@@ -24,3 +26,12 @@ func Update_Ui() -> void:
 
 func _ready() -> void:
 	Update_Ui()
+
+func _on_data_button_pressed(module: Module) -> void:
+	Module_Selected.emit(module)
+
+func _on_apps_button_pressed(module: Module) -> void:
+	Module_Selected.emit(module)
+
+func _on_so_button_pressed(module: Module) -> void:
+	Module_Selected.emit(module)

@@ -1,16 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2lbf6i01hau7"]
 
-[ext_resource type="Texture2D" uid="uid://bmgq56c4breod" path="res://img/White_square.png" id="1_fa4a8"]
+[ext_resource type="PackedScene" uid="uid://dmul4d8g5t4s" path="res://Auxiliar/module.tscn" id="1_fa4a8"]
+[ext_resource type="Script" uid="uid://c1mst652ugfsj" path="res://MainComponent/CPU/cpu.gd" id="2_xevag"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_umpus"]
-size = Vector2(64, 64)
+[node name="CPU" instance=ExtResource("1_fa4a8")]
+script = ExtResource("2_xevag")
 
-[node name="CPU" type="StaticBody2D"]
-disable_mode = 1
+[node name="Timer" type="Timer" parent="." index="3"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_umpus")
-
-[node name="Background" type="Sprite2D" parent="."]
-modulate = Color(0.201527, 0.201527, 0.201527, 1)
-texture = ExtResource("1_fa4a8")
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
