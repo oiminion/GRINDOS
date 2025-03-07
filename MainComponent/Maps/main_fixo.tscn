@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b38ctrmsfy4v0"]
+
+[ext_resource type="Script" uid="uid://d25lx0gcxvmj8" path="res://MainComponent/Maps/main_fixo.gd" id="1_tq33o"]
+[ext_resource type="PackedScene" uid="uid://c2lbf6i01hau7" path="res://MainComponent/CPU/cpu.tscn" id="2_shh87"]
+[ext_resource type="PackedScene" uid="uid://cacsol6mq74a" path="res://Auxiliar/cable.tscn" id="3_j7qlf"]
+[ext_resource type="PackedScene" uid="uid://dnnx2xs4dw1pe" path="res://MainComponent/RAM/ram_fixo.tscn" id="4_k8hw7"]
+[ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="5_owi73"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tq33o")
+
+[node name="CPU" parent="." instance=ExtResource("2_shh87")]
+position = Vector2(148, 178)
+
+[node name="CableCPU" parent="." instance=ExtResource("3_j7qlf")]
+position = Vector2(180, 114)
+
+[node name="CableDisk" parent="." instance=ExtResource("3_j7qlf")]
+position = Vector2(407, 105)
+
+[node name="RAM_fixo" parent="." instance=ExtResource("4_k8hw7")]
+position = Vector2(337, 129)
+
+[node name="Disk" parent="." instance=ExtResource("5_owi73")]
+position = Vector2(653, 130)
+
+[connection signal="button_pressed" from="CPU" to="." method="_on_cpu_button_pressed"]
+[connection signal="Module_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_module_selected"]
+[connection signal="Apss_Selected" from="Disk" to="." method="_on_disk_apss_selected"]
+[connection signal="Data_Selected" from="Disk" to="." method="_on_disk_data_selected"]
+[connection signal="SO_Selected" from="Disk" to="." method="_on_disk_so_selected"]

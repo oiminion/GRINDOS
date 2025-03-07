@@ -18,18 +18,20 @@ bg_color = Color(1, 1, 1, 1)
 [node name="Process" instance=ExtResource("1_xk82q")]
 script = ExtResource("2_2csyo")
 free = true
-connected = false
-interruption_probability = 0.0
+cpu_connected = false
+data_connected = false
+apps_connected = false
+interruption_probability = 0
 patience = 0
 max_patience = 0
 progress = 0
 conclude = 0
+blocked = false
 
 [node name="Background" parent="." index="1"]
 modulate = Color(0.241156, 0.241156, 0.241156, 1)
 
 [node name="patience_bar" type="ProgressBar" parent="Control" index="1"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -41,21 +43,19 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_hy43w")
 theme_override_styles/fill = SubResource("StyleBoxFlat_2csyo")
-value = 75.0
 fill_mode = 3
 show_percentage = false
 
 [node name="progress_bar" type="ProgressBar" parent="Control" index="2"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_dqmuj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tke2d")
-value = 75.0
 fill_mode = 3
 show_percentage = false
 

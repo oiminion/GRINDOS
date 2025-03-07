@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="GRINDOS"
+run/main_scene="uid://b38ctrmsfy4v0"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://MainComponent/global.gd"
 
 [rendering]
 

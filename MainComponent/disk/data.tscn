@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtipmjh0qvci2"]
+[gd_scene load_steps=3 format=3 uid="uid://dtipmjh0qvci2"]
 
 [ext_resource type="PackedScene" uid="uid://dmul4d8g5t4s" path="res://Auxiliar/module.tscn" id="1_pmw0h"]
+[ext_resource type="Script" uid="uid://dd5re5uw301dv" path="res://MainComponent/disk/data.gd" id="2_puu8h"]
 
 [node name="Data" instance=ExtResource("1_pmw0h")]
+script = ExtResource("2_puu8h")
 
 [node name="Background" parent="." index="1"]
 modulate = Color(0.533333, 0, 0, 1)

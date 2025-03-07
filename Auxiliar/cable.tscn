@@ -6,6 +6,6 @@
 [node name="Cable" type="Sprite2D"]
 modulate = Color(0.0383972, 0.0383972, 0.0383972, 1)
 z_index = -1
-scale = Vector2(1, 0.15)
+scale = Vector2(1e-05, 0.15)
 texture = ExtResource("1_32rrn")
 script = ExtResource("2_8vmo7")
