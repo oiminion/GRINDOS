@@ -27,6 +27,7 @@ max_patience = 0
 progress = 0
 conclude = 0
 blocked = false
+segmentation_size = 0
 
 [node name="Background" parent="." index="1"]
 modulate = Color(0.241156, 0.241156, 0.241156, 1)

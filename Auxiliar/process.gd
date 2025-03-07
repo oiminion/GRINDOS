@@ -1,5 +1,7 @@
 extends "res://Auxiliar/module.gd"
 
+signal Process_Completed(value: int)
+
 @export var free: bool = true
 @export var cpu_connected: bool = false
 @export var data_connected: bool = false
@@ -11,7 +13,8 @@ extends "res://Auxiliar/module.gd"
 @export var progress: int = 0
 @export var conclude: int = 0
 
-@export var blocked = false
+@export var blocked: bool = false
+@export var segmentation_size: int = 0
 
 func Update_Max_Ui() -> void:
 	$Control/patience_bar.max_value = max_patience
@@ -33,7 +36,7 @@ func Alocate_Space() -> void:
 	self.interruption_probability = randi_range(0,20)
 	self.max_patience = randi_range(75,150)
 	self.patience = max_patience
-	self.conclude = randi_range(50,100)
+	self.conclude = randi_range(segmentation_size/10,segmentation_size)
 	self.progress = 0
 	Update_Max_Ui()
 	$Control/patience_bar.visible = true
@@ -58,6 +61,8 @@ func Free_Space() -> void:
 	self.patience = 0
 	self.progress = 0
 	self.conclude = 0
+	$Control/patience_bar.value = patience
+	$Control/progress_bar.value = progress
 	$Control/patience_bar.visible = false
 	$Control/progress_bar.visible = false
 	free = true
@@ -77,13 +82,14 @@ func Unblock() -> void:
 func _on_cycle_timer_timeout() -> void:#WIP
 	if data_connected:
 		Unblock()
-	if cpu_connected and not blocked:
+	if cpu_connected and not blocked and not free:
 		Change_Progress_Bar_Color("00ff00")
 		patience = max_patience
 		progress += 1
 		$Control/patience_bar.value = patience
 		$Control/progress_bar.value = progress
 		if progress >= conclude:
+			Process_Completed.emit(((conclude*10)/max_patience))
 			Free_Space()
 			if apps_connected:
 				Alocate_Space()

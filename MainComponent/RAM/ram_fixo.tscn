@@ -5,5 +5,5 @@
 
 [node name="RAM_fixo" instance=ExtResource("1_3oakt")]
 script = ExtResource("2_0vous")
-segmentation_size = 5.0
+segmentation_size = 50.0
 segmentation_quantity = null
