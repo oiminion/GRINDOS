@@ -8,3 +8,5 @@ var points: int = 0:
 	set(value):
 		points = value
 		Points_Changed.emit()
+
+var max_capacity: float = 200

@@ -1,7 +1,7 @@
 extends "res://MainComponent/RAM/ram.gd"
 
 @export var segmentation_size: float = 50
-@export var segmentation_quantity: int = max_capacity / segmentation_size
+@export var segmentation_quantity: int = Global.max_capacity / segmentation_size
 
 signal Module_Selected(module: Module)
 signal Clear_CPU_Connected
@@ -21,21 +21,20 @@ func Free_Count() -> int:
 	return result
 
 func Process_Completed(value: int) -> void:
-	print(Free_Count())
 	Global.points += (value + 1) * Free_Count()
 
 func Calculate_Module_Size() -> float:
-	return $memory_space.scale.y / max_capacity * segmentation_size
+	return $memory_space.scale.y / Global.max_capacity * segmentation_size
 
 func Update_Segmentation_Quantity() -> void:
-	segmentation_quantity = max_capacity / segmentation_size
+	segmentation_quantity = Global.max_capacity / segmentation_size
 
 func Change_Segmentation_Size(value: float) -> void:
 	segmentation_size = value
 	Update_Segmentation_Quantity()
 
 func Add_Capacity(value: float) -> void:
-	max_capacity += value
+	Global.max_capacity += value
 	Update_Segmentation_Quantity()
 
 func Clear_Selected_Process() -> void:

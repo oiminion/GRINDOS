@@ -107,6 +107,7 @@ func _on_cycle_timer_timeout() -> void:#WIP
 		else:
 			Change_Progress_Bar_Color("ffffff")
 		if patience <= 0:
+			Global.points -= Global.points/10
 			Free_Space()
 	elif apps_connected:
 		Alocate_Space()
