@@ -7,7 +7,7 @@ signal Process_Completed(value: int)
 @export var data_connected: bool = false
 @export var apps_connected: bool = false
 
-@export var interruption_probability: int = 0
+@export var data_probability: int = 0
 @export var patience: int = 0
 @export var max_patience: int = 0
 @export var progress: int = 0
@@ -33,7 +33,7 @@ func Alocate_Space() -> void:
 		print("tried to alocate alocated space")
 		return
 	free = false
-	self.interruption_probability = randi_range(0,20)
+	self.data_probability = randi_range(0,20)
 	self.max_patience = randi_range(75,150)
 	self.patience = max_patience
 	self.conclude = randi_range(segmentation_size/10,segmentation_size)
@@ -57,7 +57,7 @@ func Free_Space() -> void:
 	if free:
 		print("tried to free free space")
 		return
-	self.interruption_probability = 0
+	self.data_probability = 0
 	self.patience = 0
 	self.progress = 0
 	self.conclude = 0
@@ -82,30 +82,28 @@ func Unblock() -> void:
 func _on_cycle_timer_timeout() -> void:#WIP
 	if data_connected:
 		Unblock()
-	if cpu_connected and not blocked and not free:
+	if cpu_connected and not free:
 		Change_Progress_Bar_Color("00ff00")
 		patience = max_patience
 		progress += 1
 		$Control/patience_bar.value = patience
 		$Control/progress_bar.value = progress
 		if progress >= conclude:
-			Process_Completed.emit(((conclude*10)/max_patience))
-			Free_Space()
-			if apps_connected:
-				Alocate_Space()
-		if not data_connected:
-			var aux = randi_range(0,1000)
-			if aux < interruption_probability:
+			var aux: int = randi_range(0,100)
+			if aux < data_probability:
 				blocked = true
-		else:
-			Unblock()
+				Change_Progress_Bar_Color("ff0000")
+			if data_connected:
+				blocked = false
+			if not blocked:
+				Process_Completed.emit(((conclude*10)/max_patience))
+				Free_Space()
+			if free and apps_connected:
+				Alocate_Space()
 	elif not free:
 		patience -= 1
 		$Control/patience_bar.value = patience
-		if blocked:
-			Change_Progress_Bar_Color("ff0000")
-		else:
-			Change_Progress_Bar_Color("ffffff")
+		Change_Progress_Bar_Color("ffffff")
 		if patience <= 0:
 			Global.points -= Global.points/10
 			Free_Space()
