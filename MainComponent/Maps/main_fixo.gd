@@ -1,6 +1,12 @@
 extends Node2D
 
 @export var Selected: Module = null
+@export var segmentation_size: float = 50:
+	get:
+		return segmentation_size
+	set(value):
+		segmentation_size = value
+		$RAM_fixo.Update_Segmentation_Quantity()
 
 func Connect_CPU(module: Module) -> void:
 	$RAM_fixo.Clear_CPU_Connected.emit()

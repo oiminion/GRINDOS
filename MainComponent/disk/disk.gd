@@ -4,9 +4,24 @@ signal Apss_Selected(module: Module)
 signal Data_Selected(module: Module)
 signal SO_Selected(module: Module)
 
-@export var Data: float = 60
-@export var Apps: float = 40
-@export var So: float = 20
+@export var Data: float = 60:
+	get:
+		return Data
+	set(value):
+		Data = value
+		Update_Ui()
+@export var Apps: float = 40:
+	get:
+		return Apps
+	set(value):
+		Apps = value
+		Update_Ui()
+@export var So: float = 20:
+	get:
+		return So
+	set(value):
+		So = value
+		Update_Ui()
 
 @export var connected: Module = null
 
