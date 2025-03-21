@@ -9,4 +9,9 @@ var points: int = 0:
 		points = value
 		Points_Changed.emit()
 
-var max_capacity: float = 200
+var RAM_max_capacity: float = 200
+var segmentation_size: float = 50
+
+var disk_max_capacity: float = 200
+
+var unlocked_upgrades: Dictionary = {}

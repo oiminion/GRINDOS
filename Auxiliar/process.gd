@@ -83,7 +83,8 @@ func _on_cycle_timer_timeout() -> void:#WIP
 	if data_connected:
 		Unblock()
 	if cpu_connected and not free:
-		Change_Progress_Bar_Color("00ff00")
+		if not blocked:
+			Change_Progress_Bar_Color("00ff00")
 		patience = max_patience
 		progress += 1
 		$Control/patience_bar.value = patience
@@ -103,7 +104,8 @@ func _on_cycle_timer_timeout() -> void:#WIP
 	elif not free:
 		patience -= 1
 		$Control/patience_bar.value = patience
-		Change_Progress_Bar_Color("ffffff")
+		if not blocked:
+			Change_Progress_Bar_Color("ffffff")
 		if patience <= 0:
 			Global.points -= Global.points/10
 			Free_Space()

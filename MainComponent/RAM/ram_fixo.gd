@@ -1,7 +1,6 @@
 extends "res://MainComponent/RAM/ram.gd"
 
-@export var segmentation_size: float = 50
-@export var segmentation_quantity: int = Global.max_capacity / segmentation_size
+@export var segmentation_quantity: int = Global.RAM_max_capacity / Global.segmentation_size
 
 signal Module_Selected(module: Module)
 signal Clear_CPU_Connected
@@ -24,17 +23,17 @@ func Process_Completed(value: int) -> void:
 	Global.points += (value + 1) * Free_Count()
 
 func Calculate_Module_Size() -> float:
-	return $memory_space.scale.y / Global.max_capacity * segmentation_size
+	return $memory_space.scale.y / Global.RAM_max_capacity * Global.segmentation_size
 
 func Update_Segmentation_Quantity() -> void:
-	segmentation_quantity = Global.max_capacity / segmentation_size
+	segmentation_quantity = Global.RAM_max_capacity / Global.segmentation_size
 
 func Change_Segmentation_Size(value: float) -> void:
-	segmentation_size = value
+	Global.segmentation_size = value
 	Update_Segmentation_Quantity()
 
 func Add_Capacity(value: float) -> void:
-	Global.max_capacity += value
+	Global.RAM_max_capacity += value
 	Update_Segmentation_Quantity()
 
 func Clear_Selected_Process() -> void:
@@ -45,7 +44,7 @@ func Initialize_Ram() -> void:
 	for i in segmentation_quantity:
 		var instance = process_scene.instantiate()
 		add_child(instance)
-		instance.segmentation_size = segmentation_size
+		instance.segmentation_size = Global.segmentation_size
 		self.Clear_CPU_Connected.connect(instance.Clear_CPU_Connected)
 		self.Clear_Data_Connected.connect(instance.Clear_Data_Connected)
 		self.Clear_Apps_Connected.connect(instance.Clear_Apps_Connected)

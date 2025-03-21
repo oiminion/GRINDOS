@@ -4,18 +4,16 @@ signal Apss_Selected(module: Module)
 signal Data_Selected(module: Module)
 signal SO_Selected(module: Module)
 
-@export var max_capacity: float = 50
-
-@export var Data: float = 15
-@export var Apps: float = 10
-@export var So: float = 5
+@export var Data: float = 60
+@export var Apps: float = 40
+@export var So: float = 20
 
 @export var connected: Module = null
 
 
 
 func Calculate_Module_Size(value: float) -> float:
-	return $Background.scale.y / max_capacity * value
+	return $Background.scale.y / Global.disk_max_capacity * value
 
 func Update_Ui() -> void:
 	$Data.scale.y = Calculate_Module_Size(Data)
