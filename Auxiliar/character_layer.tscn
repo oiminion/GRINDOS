@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://brm4quti8o25r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xidt"]
+bg_color = Color(0.0689503, 0.0967016, 0.146193, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="character_layer" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_top = -363.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -962.0
+offset_top = -154.0
+offset_right = -330.0
+offset_bottom = -35.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8xidt")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 12.0
+offset_right = 614.0
+offset_bottom = 109.0
