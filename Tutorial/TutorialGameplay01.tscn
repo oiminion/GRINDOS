@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxkiiqespti7o"]
+
+[ext_resource type="PackedScene" uid="uid://brm4quti8o25r" path="res://Auxiliar/character_layer.tscn" id="1_r4o2m"]
+
+[node name="TutorialGameplay01" type="Node2D"]
+
+[node name="character_layer" parent="." instance=ExtResource("1_r4o2m")]
+
+[node name="Disco" type="Node" parent="."]
+
+[node name="RAM" type="Node" parent="."]
+
+[node name="Carregar SO" type="Node" parent="."]
+
+[node name="CPU" type="Node" parent="."]
+
+[node name="Rodar SO" type="Node" parent="."]
+
+[node name="CarregarApp1" type="Node" parent="."]
+
+[node name="CarregarApp2" type="Node" parent="."]
+
+[node name="Mostrar paciencia" type="Node" parent="."]
+
+[node name="RodarApp1" type="Node" parent="."]
+
+[node name="CarregarDadosApp" type="Node" parent="."]

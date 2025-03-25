@@ -17,12 +17,12 @@ offset_left = 26.0
 offset_top = 16.0
 offset_right = 85.0
 offset_bottom = 46.0
-text = "Points:"
+text = "Pontos:"
 
 [node name="number_points" type="Label" parent="."]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 16.0
-offset_right = 255.0
-offset_bottom = 46.0
+offset_left = 83.0
+offset_top = 17.0
+offset_right = 257.0
+offset_bottom = 47.0
 text = "1243"
