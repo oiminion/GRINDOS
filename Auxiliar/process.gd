@@ -16,6 +16,8 @@ signal Process_Completed(value: int)
 @export var blocked: bool = false
 @export var segmentation_size: int = 0
 
+var color: Color
+
 func Update_Max_Ui() -> void:
 	$Control/patience_bar.max_value = max_patience
 	$Control/progress_bar.max_value = conclude
@@ -24,6 +26,7 @@ func Change_Progress_Bar_Color(hex_code: String) -> void:
 	var sb = StyleBoxFlat.new()
 	$Control/progress_bar.add_theme_stylebox_override("fill", sb)
 	sb.bg_color = Color(hex_code)
+	color = Color(hex_code)
 
 func _ready():
 	self.button_pressed.connect(get_parent().Process_Selected)
@@ -38,6 +41,8 @@ func Alocate_Space() -> void:
 	self.patience = max_patience
 	self.conclude = randi_range(segmentation_size/10,segmentation_size)
 	self.progress = 0
+	color = Global.get_Process_Color()
+	$Control/progress_bar.self_modulate = color
 	Update_Max_Ui()
 	$Control/patience_bar.visible = true
 	$Control/progress_bar.visible = true
@@ -61,6 +66,7 @@ func Free_Space() -> void:
 	self.patience = 0
 	self.progress = 0
 	self.conclude = 0
+	Global.free_Process_Color(color)
 	$Control/patience_bar.value = patience
 	$Control/progress_bar.value = progress
 	$Control/patience_bar.visible = false
@@ -80,35 +86,36 @@ func Unblock() -> void:
 	blocked = false
 
 func _on_cycle_timer_timeout() -> void:#WIP
+	if patience <= 0 and not free:
+		Global.points -= Global.points/10
+		blocked = false
+		Free_Space()
+	#patience -= 1 WIP
 	if data_connected:
 		Unblock()
 	if cpu_connected and not free:
 		if not blocked:
-			Change_Progress_Bar_Color("00ff00")
-		patience = max_patience
+			patience = max_patience
 		progress += 1
 		$Control/patience_bar.value = patience
 		$Control/progress_bar.value = progress
 		if progress >= conclude:
 			var aux: int = randi_range(0,100)
-			if aux < data_probability:
+			if aux < data_probability and not blocked:
 				blocked = true
 				Change_Progress_Bar_Color("ff0000")
 			if data_connected:
 				blocked = false
-			if not blocked:
+			if not blocked and not free:
 				Process_Completed.emit(((conclude*10)/max_patience))
 				Free_Space()
 			if free and apps_connected:
 				Alocate_Space()
 	elif not free:
-		patience -= 1
 		$Control/patience_bar.value = patience
 		if not blocked:
-			Change_Progress_Bar_Color("ffffff")
-		if patience <= 0:
-			Global.points -= Global.points/10
-			Free_Space()
-	elif apps_connected:
+			pass
+			#Change_Progress_Bar_Color("ffffff")
+	elif free and apps_connected:
 		Alocate_Space()
 	

@@ -1,6 +1,6 @@
 extends "res://MainComponent/RAM/ram.gd"
 
-@export var segmentation_quantity: int = Global.RAM_max_capacity / get_parent().segmentation_size
+@export var segmentation_quantity: int
 
 signal Module_Selected(module: Module)
 signal Clear_CPU_Connected
@@ -51,6 +51,7 @@ func Initialize_Ram() -> void:
 
 func _ready() -> void:
 	segmentation = "fixo"
+	segmentation_quantity = Global.RAM_max_capacity / get_parent().segmentation_size
 	Initialize_Ram()
 
 func Process_Selected(module: Module) -> void:

@@ -72,5 +72,5 @@ func _on_disk_apss_selected(module: Module) -> void:
 	elif Selected.get_parent() != module.get_parent():
 		Connect_Disk_Apps(module)
 
-func _on_disk_so_selected(module: Module) -> void:
+func _on_disk_so_selected(_module: Module) -> void:
 	pass

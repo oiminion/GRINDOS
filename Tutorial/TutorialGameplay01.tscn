@@ -1,10 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxkiiqespti7o"]
+[gd_scene load_steps=4 format=3 uid="uid://cxkiiqespti7o"]
 
+[ext_resource type="Script" uid="uid://cwa8b83ntc21l" path="res://Tutorial/tutorial_gameplay_01.gd" id="1_4sdjq"]
 [ext_resource type="PackedScene" uid="uid://brm4quti8o25r" path="res://Auxiliar/character_layer.tscn" id="1_r4o2m"]
+[ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="3_osmo6"]
 
 [node name="TutorialGameplay01" type="Node2D"]
+script = ExtResource("1_4sdjq")
 
 [node name="character_layer" parent="." instance=ExtResource("1_r4o2m")]
+visible = false
+
+[node name="Disk" parent="." instance=ExtResource("3_osmo6")]
+visible = false
+position = Vector2(787, 111)
 
 [node name="Disco" type="Node" parent="."]
 
@@ -25,3 +33,5 @@
 [node name="RodarApp1" type="Node" parent="."]
 
 [node name="CarregarDadosApp" type="Node" parent="."]
+
+[connection signal="finished_talk" from="character_layer" to="." method="_on_character_layer_finished_talk"]
