@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxkiiqespti7o"]
 
-[ext_resource type="Script" uid="uid://cwa8b83ntc21l" path="res://Tutorial/tutorial_gameplay_01.gd" id="1_4sdjq"]
+[ext_resource type="Script" path="res://Tutorial/tutorial_gameplay_01.gd" id="1_4sdjq"]
 [ext_resource type="PackedScene" uid="uid://brm4quti8o25r" path="res://Auxiliar/character_layer.tscn" id="1_r4o2m"]
 [ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="3_osmo6"]
 
