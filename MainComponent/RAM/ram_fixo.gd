@@ -3,6 +3,7 @@ extends "res://MainComponent/RAM/ram.gd"
 @export var segmentation_size: float = 50
 @export var segmentation_quantity: int = Global.max_capacity / segmentation_size
 
+
 signal Module_Selected(module: Module)
 signal Clear_CPU_Connected
 signal Clear_Data_Connected
