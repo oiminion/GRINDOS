@@ -1,6 +1,12 @@
 extends Node2D
 
 @export var Selected: Module = null
+@export var segmentation_size: float = 50:
+	get:
+		return segmentation_size
+	set(value):
+		segmentation_size = value
+		$RAM_fixo.Update_Segmentation_Quantity()
 
 func Connect_CPU(module: Module) -> void:
 	$RAM_fixo.Clear_CPU_Connected.emit()
@@ -66,5 +72,5 @@ func _on_disk_apss_selected(module: Module) -> void:
 	elif Selected.get_parent() != module.get_parent():
 		Connect_Disk_Apps(module)
 
-func _on_disk_so_selected(module: Module) -> void:
+func _on_disk_so_selected(_module: Module) -> void:
 	pass

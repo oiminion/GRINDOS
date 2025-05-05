@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://brm4quti8o25r"]
+
+[ext_resource type="Script" uid="uid://cg0b1drgeuwsc" path="res://Auxiliar/character_layer.gd" id="1_fbwhu"]
+[ext_resource type="Texture2D" uid="uid://bninm4ohohlhc" path="res://icon.svg" id="2_1p5xs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xidt"]
+bg_color = Color(0.0689503, 0.0967016, 0.146193, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="character_layer" type="CanvasLayer"]
+script = ExtResource("1_fbwhu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_top = -363.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_1p5xs")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -962.0
+offset_top = -154.0
+offset_right = -330.0
+offset_bottom = -35.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_8xidt")
+
+[node name="NextButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 12.0
+offset_right = 614.0
+offset_bottom = 109.0
+mouse_filter = 2
+scroll_following = true
+
+[node name="SkipButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_top = 5.0
+offset_right = 67.0
+offset_bottom = 36.0
+grow_horizontal = 0
+text = "Pular"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+
+[node name="AutoDelay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="button_down" from="Panel/NextButton" to="." method="_on_next_button_button_down"]
+[connection signal="button_down" from="Panel/SkipButton" to="." method="_on_skip_button_button_down"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AutoDelay" to="." method="_on_auto_delay_timeout"]

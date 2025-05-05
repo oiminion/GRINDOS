@@ -21,7 +21,7 @@ free = true
 cpu_connected = false
 data_connected = false
 apps_connected = false
-interruption_probability = 0
+data_probability = 0
 patience = 0
 max_patience = 0
 progress = 0
@@ -33,6 +33,7 @@ segmentation_size = 0
 modulate = Color(0.241156, 0.241156, 0.241156, 1)
 
 [node name="patience_bar" type="ProgressBar" parent="Control" index="1"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -48,6 +49,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="progress_bar" type="ProgressBar" parent="Control" index="2"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
