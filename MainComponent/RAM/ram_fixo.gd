@@ -7,8 +7,6 @@ signal Clear_CPU_Connected
 signal Clear_Data_Connected
 signal Clear_Apps_Connected
 
-var processes: Array
-
 var process_scene: PackedScene = preload("res://Auxiliar/process.tscn")
 
 func Free_Count() -> int:
@@ -44,9 +42,9 @@ func Initialize_Ram() -> void:
 		instance.scale.y = Calculate_Module_Size()
 		instance.position.x = 32
 		if i == 0:
-			instance.position.y = instance.scale.y * 32 + 1
+			instance.position.y = instance.scale.y * 32
 		else:
-			instance.position.y = instance.scale.y * 32 + off_set + 1
+			instance.position.y = instance.scale.y * 32 + off_set
 		off_set = instance.position.y + instance.scale.y * 32
 
 func _ready() -> void:

@@ -2,6 +2,7 @@ extends Node
 
 signal Points_Changed
 
+#WIP adicionar mais cores
 var process_colors: PackedColorArray = PackedColorArray([
 	Color(0.69675,0.31901,0.42888),
 	Color(0.60407,0.94785,0.50633),
@@ -16,18 +17,7 @@ var process_colors: PackedColorArray = PackedColorArray([
 	Color(0.96053,0.70409,0.17234)
 	])
 
-var used_process_colors: Array = [
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false
-]
+var used_process_colors: Array = []
 
 var points: int = 0:
 	get:
@@ -37,6 +27,8 @@ var points: int = 0:
 		Points_Changed.emit()
 
 var RAM_max_capacity: float = 500
+
+var SO_max_capacity: float = 100
 
 var disk_max_capacity: float = 200
 
@@ -58,3 +50,7 @@ func free_Process_Color(process_color: Color) -> void:
 	while( process_colors[aux] != process_color):
 		aux += 1
 	used_process_colors[aux] = false
+
+func _ready() -> void:
+	for i in process_colors.size():
+		used_process_colors.append(false)

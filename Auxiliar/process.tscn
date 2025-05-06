@@ -30,7 +30,7 @@ blocked = false
 segmentation_size = 0
 
 [node name="Background" parent="." index="1"]
-modulate = Color(0.241156, 0.241156, 0.241156, 1)
+modulate = Color(0.239216, 0.239216, 0.239216, 1)
 
 [node name="patience_bar" type="ProgressBar" parent="Control" index="1"]
 visible = false

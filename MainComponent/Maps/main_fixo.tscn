@@ -31,4 +31,3 @@ position = Vector2(653, 130)
 [connection signal="Module_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_module_selected"]
 [connection signal="Apss_Selected" from="Disk" to="." method="_on_disk_apss_selected"]
 [connection signal="Data_Selected" from="Disk" to="." method="_on_disk_data_selected"]
-[connection signal="SO_Selected" from="Disk" to="." method="_on_disk_so_selected"]

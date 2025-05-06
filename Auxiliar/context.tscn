@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6uceuc673c5"]
+
+[ext_resource type="Texture2D" uid="uid://bmgq56c4breod" path="res://img/White_square.png" id="1_0of08"]
+[ext_resource type="Script" uid="uid://ddce8xyerdyue" path="res://Auxiliar/context.gd" id="1_qom76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qom76"]
+size = Vector2(64, 64)
+
+[node name="Context" type="StaticBody2D"]
+script = ExtResource("1_qom76")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_qom76")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.243475, 0.243593, 0.37506, 1)
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_0of08")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Control"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_up" from="Control/Button" to="." method="_on_button_button_up"]
