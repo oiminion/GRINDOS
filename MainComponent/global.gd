@@ -26,6 +26,8 @@ var points: int = 0:
 		points = value
 		Points_Changed.emit()
 
+var max_capacity: float = 200
+var SO_RAM_Size: float = 50
 var RAM_max_capacity: float = 500
 
 var SO_max_capacity: float = 100
