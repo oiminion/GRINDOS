@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b38ctrmsfy4v0"]
+[gd_scene load_steps=8 format=3 uid="uid://b38ctrmsfy4v0"]
 
 [ext_resource type="Script" uid="uid://d25lx0gcxvmj8" path="res://MainComponent/Maps/main_fixo.gd" id="1_tq33o"]
 [ext_resource type="PackedScene" uid="uid://c2lbf6i01hau7" path="res://MainComponent/CPU/cpu.tscn" id="2_shh87"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dnnx2xs4dw1pe" path="res://MainComponent/RAM/ram_fixo.tscn" id="4_k8hw7"]
 [ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="5_owi73"]
 [ext_resource type="PackedScene" uid="uid://crarqxjnr6ow2" path="res://MainComponent/Maps/hud.tscn" id="6_shh87"]
+[ext_resource type="PackedScene" uid="uid://c52e2tk2cddrn" path="res://MainComponent/Maps/shop.tscn" id="7_j7qlf"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tq33o")
@@ -26,6 +27,15 @@ position = Vector2(337, 129)
 position = Vector2(653, 130)
 
 [node name="HUD" parent="." instance=ExtResource("6_shh87")]
+
+[node name="Shop" parent="." instance=ExtResource("7_j7qlf")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1152.0
+offset_right = 1152.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="button_pressed" from="CPU" to="." method="_on_cpu_button_pressed"]
 [connection signal="Module_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_module_selected"]

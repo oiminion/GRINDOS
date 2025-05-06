@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxkiiqespti7o"]
+[gd_scene load_steps=7 format=3 uid="uid://cxkiiqespti7o"]
 
 [ext_resource type="Script" path="res://Tutorial/tutorial_gameplay_01.gd" id="1_4sdjq"]
 [ext_resource type="PackedScene" uid="uid://brm4quti8o25r" path="res://Auxiliar/character_layer.tscn" id="1_r4o2m"]
 [ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="3_osmo6"]
+[ext_resource type="PackedScene" uid="uid://dsah3ait20v26" path="res://Tutorial/so_tutorial.tscn" id="4_vems5"]
+[ext_resource type="PackedScene" uid="uid://dnnx2xs4dw1pe" path="res://MainComponent/RAM/ram_fixo.tscn" id="5_8bikk"]
+[ext_resource type="PackedScene" uid="uid://cacsol6mq74a" path="res://Auxiliar/cable.tscn" id="6_8bikk"]
 
 [node name="TutorialGameplay01" type="Node2D"]
 script = ExtResource("1_4sdjq")
@@ -14,7 +17,13 @@ visible = false
 visible = false
 position = Vector2(787, 111)
 
+[node name="SO" parent="." instance=ExtResource("4_vems5")]
+position = Vector2(793, 331)
+
 [node name="Disco" type="Node" parent="."]
+
+[node name="RAM_fixo" parent="." instance=ExtResource("5_8bikk")]
+position = Vector2(349, 211)
 
 [node name="RAM" type="Node" parent="."]
 
@@ -34,4 +43,10 @@ position = Vector2(787, 111)
 
 [node name="CarregarDadosApp" type="Node" parent="."]
 
+[node name="Cable" parent="." instance=ExtResource("6_8bikk")]
+position = Vector2(230, -62)
+scale = Vector2(0.656255, 0.15)
+
 [connection signal="finished_talk" from="character_layer" to="." method="_on_character_layer_finished_talk"]
+[connection signal="SO_Selected" from="SO" to="." method="_on_so_so_selected"]
+[connection signal="Module_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_module_selected"]

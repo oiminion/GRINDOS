@@ -2,6 +2,7 @@ extends "res://MainComponent/RAM/ram.gd"
 
 @export var segmentation_quantity: int
 
+
 signal Module_Selected(module: Module)
 signal Clear_CPU_Connected
 signal Clear_Data_Connected
