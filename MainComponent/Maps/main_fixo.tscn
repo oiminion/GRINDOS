@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dnnx2xs4dw1pe" path="res://MainComponent/RAM/ram_fixo.tscn" id="4_k8hw7"]
 [ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="5_owi73"]
 [ext_resource type="PackedScene" uid="uid://crarqxjnr6ow2" path="res://MainComponent/Maps/hud.tscn" id="6_shh87"]
-[ext_resource type="PackedScene" path="res://MainComponent/Maps/shop.tscn" id="7_j7qlf"]
+[ext_resource type="PackedScene" uid="uid://c52e2tk2cddrn" path="res://MainComponent/Maps/shop.tscn" id="7_j7qlf"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tq33o")
@@ -38,6 +38,9 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [connection signal="button_pressed" from="CPU" to="." method="_on_cpu_button_pressed"]
+[connection signal="Change_CPU_Color" from="RAM_fixo" to="." method="_on_ram_fixo_change_cpu_color"]
+[connection signal="Completed_Process" from="RAM_fixo" to="." method="_on_ram_fixo_completed_process"]
+[connection signal="Context_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_context_selected"]
 [connection signal="Module_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_module_selected"]
 [connection signal="Apss_Selected" from="Disk" to="." method="_on_disk_apss_selected"]
 [connection signal="Data_Selected" from="Disk" to="." method="_on_disk_data_selected"]

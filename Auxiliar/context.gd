@@ -1,8 +1,6 @@
-extends StaticBody2D
+extends "res://Auxiliar/module.gd"
 
 class_name Context
-
-signal button_pressed(context: Context)
 
 @export var context_color: Color
 
@@ -16,5 +14,5 @@ func clearColor() -> void:
 	self_modulate = Color.WHITE
 	$Background.visible = false
 
-func contextSelected() -> void:
-	button_pressed.emit(self)
+func _ready():
+	self.button_pressed.connect(get_parent().Context_Module_Selected)

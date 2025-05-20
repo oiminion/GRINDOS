@@ -8,13 +8,23 @@ extends Node2D
 		segmentation_size = value
 		$RAM_fixo.Update_Segmentation_Quantity()
 
+func Change_CPU_Color(cpu_var: Module, process: Module) -> void:
+	if process.color != Color.WHITE:
+		cpu_var.connect_ContextColor(process.color)
+	else:
+		cpu_var.clear_Context()
+
 func Connect_CPU(module: Module) -> void:
 	$RAM_fixo.Clear_CPU_Connected.emit()
 	$CableCPU.Connect_Module(Selected, module)
 	if module == $CPU:
-		Selected.Connect_CPU()
+		if module.color == Color.WHITE or module.color == Selected.color:
+			Selected.Connect_CPU()
+			Change_CPU_Color(module, Selected)
 	else:
-		module.Connect_CPU()
+		if Selected.color == Color.WHITE or module.color == Selected.color:
+			module.Connect_CPU()
+			Change_CPU_Color(Selected, module)
 	Selected = null
 
 func Connect_Disk_Cable(module: Module) -> void:
@@ -74,3 +84,28 @@ func _on_disk_apss_selected(module: Module) -> void:
 
 func _on_disk_so_selected(_module: Module) -> void:
 	pass
+
+
+func _on_ram_fixo_context_selected(context: Context) -> void:
+	if Selected == null:
+		Selected = context
+	elif Selected == $CPU:
+		$RAM_fixo.Clear_CPU_Connected.emit()
+		if $CPU.color == Color.WHITE and context.context_color != Color.WHITE:
+			$CPU.connect_ContextColor(context.context_color)
+		elif $CPU.color != Color.WHITE and context.context_color == Color.WHITE:
+			context.changeColor($CPU.color)
+		$CableCPU.Connect_Context($CPU,context)
+
+func _on_ram_fixo_completed_process() -> void:
+	$CPU.clear_Context()
+
+
+func _on_ram_fixo_change_cpu(color: Color) -> void:
+	print("AAAAAAAAAA")
+	$CPU.connect_ContextColor(color)
+
+
+func _on_ram_fixo_change_cpu_color(color: Color) -> void:
+	print("BBBBBBBBB")
+	$CPU.connect_ContextColor(color)

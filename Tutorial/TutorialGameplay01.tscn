@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Tutorial/tutorial_gameplay_01.gd" id="1_4sdjq"]
 [ext_resource type="PackedScene" uid="uid://brm4quti8o25r" path="res://Auxiliar/character_layer.tscn" id="1_r4o2m"]
 [ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="3_osmo6"]
-[ext_resource type="PackedScene" path="res://Tutorial/so_tutorial.tscn" id="4_vems5"]
+[ext_resource type="PackedScene" uid="uid://dsah3ait20v26" path="res://Tutorial/so_tutorial.tscn" id="4_vems5"]
 [ext_resource type="PackedScene" uid="uid://dnnx2xs4dw1pe" path="res://MainComponent/RAM/ram_fixo.tscn" id="5_8bikk"]
 [ext_resource type="PackedScene" uid="uid://cacsol6mq74a" path="res://Auxiliar/cable.tscn" id="6_8bikk"]
 

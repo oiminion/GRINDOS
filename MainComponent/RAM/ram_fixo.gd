@@ -2,13 +2,20 @@ extends "res://MainComponent/RAM/ram.gd"
 
 @export var segmentation_quantity: int
 
-
 signal Module_Selected(module: Module)
 signal Clear_CPU_Connected
 signal Clear_Data_Connected
 signal Clear_Apps_Connected
 
+signal Change_CPU_Color(color: Color)
+signal Completed_Process
+
+signal Context_Selected(context:Context)
+
 var process_scene: PackedScene = preload("res://Auxiliar/process.tscn")
+
+func Change_CPU(color: Color) -> void:
+	Change_CPU_Color.emit(color)
 
 func Free_Count() -> int:
 	var result: int = 0
@@ -20,6 +27,7 @@ func Free_Count() -> int:
 
 func Process_Completed(value: int) -> void:
 	Global.points += (value + 1) * Free_Count()
+	Completed_Process.emit()
 
 func Calculate_Module_Size() -> float:
 	return $memory_space.scale.y / Global.RAM_max_capacity * get_parent().segmentation_size
@@ -55,3 +63,7 @@ func _ready() -> void:
 
 func Process_Selected(module: Module) -> void:
 	Module_Selected.emit(module)
+
+
+func _on_so_space_context_selected(context: Context) -> void:
+	Context_Selected.emit(context)

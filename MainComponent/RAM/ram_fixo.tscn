@@ -10,3 +10,5 @@ segmentation_quantity = 0
 
 [node name="so_space" parent="." index="1" instance=ExtResource("3_0vous")]
 position = Vector2(0, 192)
+
+[connection signal="Context_Selected" from="so_space" to="." method="_on_so_space_context_selected"]

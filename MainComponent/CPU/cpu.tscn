@@ -5,6 +5,10 @@
 
 [node name="CPU" instance=ExtResource("1_fa4a8")]
 script = ExtResource("2_xevag")
+color = Color(0, 0, 0, 1)
+
+[node name="Background" parent="." index="1"]
+modulate = Color(0.239216, 0.239216, 0.239216, 1)
 
 [node name="Timer" type="Timer" parent="." index="3"]
 

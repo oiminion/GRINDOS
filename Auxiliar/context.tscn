@@ -38,4 +38,5 @@ grow_vertical = 2
 flat = true
 metadata/_edit_use_anchors_ = true
 
+[connection signal="button_pressed" from="." to="." method="contextSelected"]
 [connection signal="button_up" from="Control/Button" to="." method="_on_button_button_up"]

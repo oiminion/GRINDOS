@@ -28,12 +28,16 @@ func Clear_Selected_Process() -> void:
 func Context_Module_Selected(context: Context) -> void:
 	Context_Selected.emit(context)
 
+func c_selected(cont: Context) -> void:
+	Context_Selected.emit(cont)
+
 func Initialize_SO_Space() -> void:
 	var off_set: int = Calculate_Context_Size() * 128
 	for i in segmentation_quantity:
 		var instance = context_scene.instantiate()
 		add_child(instance)
-		#instance.contextSelected.connect(Context_Selected)
+		self.Clear_Context_Connected.connect(instance.clearColor)
+		#instance.contextSelected.connect(c_selected)
 		instance.scale.y = Calculate_Context_Size()
 		instance.position.x = 32
 		if i == 0:

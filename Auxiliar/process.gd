@@ -2,6 +2,8 @@ extends "res://Auxiliar/module.gd"
 
 signal Process_Completed(value: int)
 
+signal Change_CPU(color: Color)
+
 @export var free: bool = true
 @export var cpu_connected: bool = false
 @export var data_connected: bool = false
@@ -16,7 +18,8 @@ signal Process_Completed(value: int)
 @export var blocked: bool = false
 @export var segmentation_size: int = 0
 
-var color: Color
+var cpu_color: Color = Color.WHITE
+var color: Color = Color.WHITE
 
 func Update_Max_Ui() -> void:
 	$Control/patience_bar.max_value = max_patience
@@ -30,6 +33,7 @@ func Change_Progress_Bar_Color(hex_code: String) -> void:
 
 func _ready():
 	self.button_pressed.connect(get_parent().Process_Selected)
+	self.Change_CPU.connect(get_parent().Change_CPU)
 
 func Alocate_Space() -> void:
 	if not free:
@@ -46,6 +50,8 @@ func Alocate_Space() -> void:
 	Update_Max_Ui()
 	$Control/patience_bar.visible = true
 	$Control/progress_bar.visible = true
+	if cpu_connected:
+		Change_CPU.emit(color)
 
 func Clear_Data_Connected() -> void:
 	data_connected = false
@@ -67,6 +73,7 @@ func Free_Space() -> void:
 	self.progress = 0
 	self.conclude = 0
 	Global.free_Process_Color(color)
+	color = Color.WHITE
 	$Control/patience_bar.value = patience
 	$Control/progress_bar.value = progress
 	$Control/patience_bar.visible = false
@@ -103,7 +110,9 @@ func _on_cycle_timer_timeout() -> void:#WIP
 			var aux: int = randi_range(0,100)
 			if aux < data_probability and not blocked:
 				blocked = true
-				Change_Progress_Bar_Color("ff0000")
+				var sb = StyleBoxFlat.new()
+				$Control/progress_bar.add_theme_stylebox_override("fill", sb)
+				sb.bg_color = Color("ff0000")
 			if data_connected:
 				blocked = false
 			if not blocked and not free:
