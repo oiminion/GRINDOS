@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://brm4quti8o25r" path="res://Auxiliar/character_layer.tscn" id="1_r4o2m"]
 [ext_resource type="PackedScene" uid="uid://cd1wjm1wl8j24" path="res://MainComponent/disk/disk.tscn" id="3_osmo6"]
 [ext_resource type="PackedScene" uid="uid://dsah3ait20v26" path="res://Tutorial/so_tutorial.tscn" id="4_vems5"]
+[ext_resource type="PackedScene" uid="uid://dnnx2xs4dw1pe" path="res://MainComponent/RAM/ram_fixo.tscn" id="5_8bikk"]
 [ext_resource type="PackedScene" uid="uid://cacsol6mq74a" path="res://Auxiliar/cable.tscn" id="6_8bikk"]
 [ext_resource type="PackedScene" uid="uid://c2lbf6i01hau7" path="res://MainComponent/CPU/cpu.tscn" id="6_hwj5e"]
-[ext_resource type="PackedScene" uid="uid://dllvjfxm4vvj7" path="res://Tutorial/ram_fixoTutorial.tscn" id="6_jp4gk"]
 [ext_resource type="Script" uid="uid://c2aw0ftk300vi" path="res://Tutorial/setas.gd" id="8_h458q"]
 [ext_resource type="Texture2D" uid="uid://depec8u47pjsm" path="res://Tutorial/setas.png" id="8_yymcc"]
 
@@ -26,12 +26,10 @@ position = Vector2(785, 115)
 [node name="CPU" parent="." instance=ExtResource("6_hwj5e")]
 position = Vector2(166, 309)
 
-[node name="RAM_fixoTutorial" parent="." instance=ExtResource("6_jp4gk")]
-position = Vector2(429, 192)
-segmentation_quantity = 0
-segmentation = ""
-
 [node name="Disco" type="Node" parent="."]
+
+[node name="RAM_fixo" parent="." instance=ExtResource("5_8bikk")]
+position = Vector2(430, 206)
 
 [node name="RAM" type="Node" parent="."]
 
@@ -61,7 +59,7 @@ scale = Vector2(0.656255, 0.15)
 script = ExtResource("8_h458q")
 
 [node name="setasram" type="Sprite2D" parent="setas"]
-position = Vector2(461, 156)
+position = Vector2(461, 251)
 scale = Vector2(0.361898, 0.368027)
 texture = ExtResource("8_yymcc")
 
@@ -72,11 +70,5 @@ texture = ExtResource("8_yymcc")
 
 [connection signal="finished_talk" from="character_layer" to="." method="_on_character_layer_finished_talk"]
 [connection signal="SO_Selected" from="SO" to="." method="_on_so_so_selected"]
-[connection signal="Apss_Selected" from="Disk" to="." method="_on_disk_apss_selected"]
-[connection signal="Data_Selected" from="Disk" to="." method="_on_disk_data_selected"]
 [connection signal="button_pressed" from="CPU" to="." method="_on_cpu_button_pressed"]
-[connection signal="Change_CPU_Color" from="RAM_fixoTutorial" to="." method="_on_ram_fixo_tutorial_change_cpu_color"]
-[connection signal="Clear_Apps_Connected" from="RAM_fixoTutorial" to="." method="_on_ram_fixo_tutorial_clear_apps_connected"]
-[connection signal="Clear_CPU_Connected" from="RAM_fixoTutorial" to="." method="_on_ram_fixo_tutorial_clear_cpu_connected"]
-[connection signal="Clear_Data_Connected" from="RAM_fixoTutorial" to="." method="_on_ram_fixo_tutorial_clear_data_connected"]
-[connection signal="Module_Selected" from="RAM_fixoTutorial" to="." method="_on_ram_fixo_tutorial_module_selected"]
+[connection signal="Module_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_module_selected"]
