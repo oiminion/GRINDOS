@@ -4,6 +4,8 @@ signal Process_Completed(value: int)
 
 signal Change_CPU(color: Color)
 
+@export var can_change_CPU_color: bool = true
+
 @export var free: bool = true
 @export var cpu_connected: bool = false
 @export var data_connected: bool = false
@@ -50,8 +52,9 @@ func Alocate_Space() -> void:
 	Update_Max_Ui()
 	$Control/patience_bar.visible = true
 	$Control/progress_bar.visible = true
-	if cpu_connected:
+	if cpu_connected and can_change_CPU_color:
 		Change_CPU.emit(color)
+		can_change_CPU_color = false
 
 func Clear_Data_Connected() -> void:
 	data_connected = false
@@ -65,6 +68,7 @@ func Clear_CPU_Connected() -> void:
 	cpu_connected = false
 
 func Free_Space() -> void:
+	can_change_CPU_color = true
 	if free:
 		print("tried to free free space")
 		return
@@ -93,6 +97,10 @@ func Unblock() -> void:
 	blocked = false
 
 func _on_cycle_timer_timeout() -> void:#WIP
+	if not blocked:
+		var sb = StyleBoxFlat.new()
+		$Control/progress_bar.add_theme_stylebox_override("fill", sb)
+		sb.bg_color = Color("ffffff")
 	if patience <= 0 and not free:
 		Global.points -= Global.points/10
 		blocked = false

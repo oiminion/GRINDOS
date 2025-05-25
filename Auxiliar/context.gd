@@ -6,13 +6,14 @@ class_name Context
 
 func changeColor(newColor: Color) -> void:
 	context_color = newColor
-	self_modulate = context_color
+	$Background.self_modulate = context_color
 	$Background.visible = true
 
 func clearColor() -> void:
 	context_color = Color.WHITE
-	self_modulate = Color.WHITE
+	$Background.self_modulate = Color.WHITE
 	$Background.visible = false
 
 func _ready():
 	self.button_pressed.connect(get_parent().Context_Module_Selected)
+	context_color = Color.WHITE

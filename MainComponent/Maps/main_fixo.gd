@@ -91,20 +91,21 @@ func _on_ram_fixo_context_selected(context: Context) -> void:
 		Selected = context
 	elif Selected == $CPU:
 		$RAM_fixo.Clear_CPU_Connected.emit()
+		print($CPU.color)
+		print(context.context_color)
 		if $CPU.color == Color.WHITE and context.context_color != Color.WHITE:
 			$CPU.connect_ContextColor(context.context_color)
+			context.clearColor()
+			print("1")
 		elif $CPU.color != Color.WHITE and context.context_color == Color.WHITE:
 			context.changeColor($CPU.color)
+			$CPU.clear_Context()
+			print("2")
+		print("AAAAAAAA")
 		$CableCPU.Connect_Context($CPU,context)
 
 func _on_ram_fixo_completed_process() -> void:
 	$CPU.clear_Context()
-
-
-func _on_ram_fixo_change_cpu(color: Color) -> void:
-	print("AAAAAAAAAA")
-	$CPU.connect_ContextColor(color)
-
 
 func _on_ram_fixo_change_cpu_color(color: Color) -> void:
 	print("BBBBBBBBB")
