@@ -8,6 +8,8 @@ extends Node2D
 		segmentation_size = value
 		$RAM_fixo.Update_Segmentation_Quantity()
 
+@export var interruption: bool = false
+
 func Change_CPU_Color(cpu_var: Module, process: Module) -> void:
 	if process.color != Color.WHITE:
 		cpu_var.connect_ContextColor(process.color)
@@ -107,13 +109,10 @@ func _on_disk_so_selected(_module: Module) -> void:
 
 func _on_ram_fixo_context_selected(context: Context) -> void:
 	if not Selected == null:
-		print(Selected.get_parent().get_class())
+		print(Selected.name)
 	if Selected == null:
 		Selected = context
-	elif Selected is Process:
-		Selected = context
-		$RAM_fixo.Clear_CPU_Connected.emit()
-	elif Selected == $CPU:
+	elif Selected == $CPU or Selected is Context:
 		$RAM_fixo.Clear_CPU_Connected.emit()
 		if $CPU.color == Color.WHITE and context.color != Color.WHITE:
 			$CPU.connect_ContextColor(context.color)
@@ -130,3 +129,8 @@ func _on_ram_fixo_completed_process() -> void:
 
 func _on_ram_fixo_change_cpu_color(color: Color) -> void:
 	$CPU.connect_ContextColor(color)
+
+
+func _on_ram_fixo_clear_context(color: Color) -> void:
+	if $CPU.color == color:
+		$CPU.clear_Context()

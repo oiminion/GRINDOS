@@ -8,6 +8,11 @@ signal Change_CPU(color: Color)
 
 signal PatienceExplode(color: Color)
 
+signal CreatedInterruption
+
+@export var can_interrupt: bool = false
+@export var is_interruption: bool = false
+
 @export var can_change_CPU_color: bool = true
 
 @export var free: bool = true
@@ -47,15 +52,20 @@ func Alocate_Space() -> void:
 		return
 	free = false
 	self.data_probability = randi_range(0,20)
-	self.max_patience = randi_range(75,150) * 2
+	self.max_patience = randi_range(100,150) * 2
 	self.patience = max_patience
-	self.conclude = randi_range(segmentation_size/10,segmentation_size)*2
+	self.conclude = randi_range(segmentation_size/5,segmentation_size)*2
 	self.progress = 0
 	color = Global.get_Process_Color()
 	$Control/progress_bar.self_modulate = color
 	Update_Max_Ui()
 	$Control/patience_bar.visible = true
 	$Control/progress_bar.visible = true
+	
+	if can_interrupt and randi_range(0,100) <= 10:
+		CreatedInterruption.emit()
+		is_interruption = true
+	
 	if cpu_connected and can_change_CPU_color:
 		Change_CPU.emit(color)
 		can_change_CPU_color = false
@@ -87,6 +97,7 @@ func Free_Space() -> void:
 	$Control/patience_bar.visible = false
 	$Control/progress_bar.visible = false
 	free = true
+	is_interruption = false
 
 func Connect_Data() -> void:
 	data_connected = true

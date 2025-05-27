@@ -6,7 +6,7 @@ signal Points_Changed
 var process_colors: PackedColorArray = PackedColorArray([
 	Color(0.69675,0.31901,0.42888),
 	Color(0.60407,0.94785,0.50633),
-	Color(0.34241,0.36421,0.31082),
+	Color(0.34241,0.86421,0.51082),
 	Color(0.28623,0.99492,0.77138),
 	Color(0.05499,0.47307,0.05812),
 	
@@ -38,17 +38,19 @@ var unlocked_upgrades: Dictionary = {}
 
 func get_Process_Color() -> Color:
 	var aux :int = randi_range(0,9)
+	var max_tries :int = 5
+	while(used_process_colors[aux] and max_tries > 0):
+		aux = randi_range(0,9)
+		max_tries -= 1
 	while(used_process_colors[aux]):
 		aux += 1
 		if aux >= 9:
 			aux = 0
-	
 	used_process_colors[aux] = true
 	return process_colors[aux]
 
 func free_Process_Color(process_color: Color) -> void:
 	var aux :int = 0
-	print(process_color)
 	while( process_colors[aux] != process_color):
 		aux += 1
 	used_process_colors[aux] = false
