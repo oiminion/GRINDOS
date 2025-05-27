@@ -108,6 +108,7 @@ func _on_disk_data_selected(module: Module) -> void:
 		Selected = null
 	elif Selected.get_parent() != module.get_parent():
 		Connect_Disk_Data(module)
+	Selected = null
 
 func _on_disk_apss_selected(module: Module) -> void:
 	if Selected == null:
@@ -116,6 +117,7 @@ func _on_disk_apss_selected(module: Module) -> void:
 		Selected = null
 	elif Selected.get_parent() != module.get_parent():
 		Connect_Disk_Apps(module)
+	Selected = null
 
 func _on_disk_so_selected(_module: Module) -> void:
 	pass
@@ -124,9 +126,20 @@ func _on_disk_so_selected(_module: Module) -> void:
 func _on_ram_fixo_tutorial_module_selected(module: Module) -> void:
 	if Selected == null:
 		Selected = module
+	elif Selected.get_parent() == $RAM_fixoTutorial and Selected != module:
+		Selected = module
 	elif Selected.get_parent() != module.get_parent():
 		$CableDisk.Connect_Module(module, Selected)
 		
 		if(TutorialProgress.tutorial_progress == 0 ):
 			primeiroTutorialCompleto()
 	Selected == null
+
+func _process(delta: float) -> void:
+	if( Selected == null ):
+		$select.visible = 0
+	
+	if( Selected != null ):
+		$select.position = Selected.global_position 
+		$select.visible = 1
+		$select.rotation += 0.05

@@ -27,7 +27,7 @@ position = Vector2(785, 115)
 position = Vector2(166, 309)
 
 [node name="RAM_fixoTutorial" parent="." instance=ExtResource("6_jp4gk")]
-position = Vector2(429, 192)
+position = Vector2(430, 136)
 
 [node name="Disco" type="Node" parent="."]
 
@@ -54,6 +54,11 @@ scale = Vector2(0.656255, 0.15)
 [node name="CableCPU" parent="." instance=ExtResource("6_8bikk")]
 position = Vector2(291, -62)
 scale = Vector2(0.656255, 0.15)
+
+[node name="select" type="Sprite2D" parent="."]
+position = Vector2(540.167, -30.5)
+scale = Vector2(0.0985227, 0.102606)
+texture = ExtResource("8_yymcc")
 
 [node name="setas" type="Node2D" parent="."]
 script = ExtResource("8_h458q")
