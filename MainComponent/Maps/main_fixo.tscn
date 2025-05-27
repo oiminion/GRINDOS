@@ -39,6 +39,7 @@ grow_vertical = 1
 
 [connection signal="button_pressed" from="CPU" to="." method="_on_cpu_button_pressed"]
 [connection signal="Change_CPU_Color" from="RAM_fixo" to="." method="_on_ram_fixo_change_cpu_color"]
+[connection signal="Clear_Context" from="RAM_fixo" to="." method="_on_ram_fixo_clear_context"]
 [connection signal="Completed_Process" from="RAM_fixo" to="." method="_on_ram_fixo_completed_process"]
 [connection signal="Context_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_context_selected"]
 [connection signal="Module_Selected" from="RAM_fixo" to="." method="_on_ram_fixo_module_selected"]

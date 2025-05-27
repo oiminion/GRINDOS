@@ -17,6 +17,8 @@ bg_color = Color(1, 1, 1, 1)
 
 [node name="Process" instance=ExtResource("1_xk82q")]
 script = ExtResource("2_2csyo")
+can_interrupt = false
+is_interruption = false
 can_change_CPU_color = true
 free = true
 cpu_connected = false

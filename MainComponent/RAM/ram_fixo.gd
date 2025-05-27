@@ -11,6 +11,7 @@ signal Change_CPU_Color(color: Color)
 signal Completed_Process
 
 signal Context_Selected(context:Context)
+signal Clear_Context(color: Color)
 
 var process_scene: PackedScene = preload("res://Auxiliar/process.tscn")
 
@@ -40,6 +41,7 @@ func Clear_Selected_Process() -> void:
 
 func ClearContext(color: Color) -> void:
 	$so_space.Clear_Context(color)
+	Clear_Context.emit(color)
 
 func Initialize_Ram() -> void:
 	var off_set: int = Calculate_Module_Size() * 196
