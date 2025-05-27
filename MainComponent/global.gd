@@ -28,9 +28,9 @@ var points: int = 0:
 
 var max_capacity: float = 200
 var SO_RAM_Size: float = 50
-var RAM_max_capacity: float = 500
 
-var SO_max_capacity: float = 100
+var RAM_max_capacity: float = 300
+var SO_max_capacity: float = 10 * (RAM_max_capacity/50)
 
 var disk_max_capacity: float = 200
 

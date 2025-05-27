@@ -38,6 +38,9 @@ func Update_Segmentation_Quantity() -> void:
 func Clear_Selected_Process() -> void:
 	Clear_CPU_Connected.emit()
 
+func ClearContext(color: Color) -> void:
+	$so_space.Clear_Context(color)
+
 func Initialize_Ram() -> void:
 	var off_set: int = Calculate_Module_Size() * 196
 	for i in segmentation_quantity:
@@ -48,6 +51,7 @@ func Initialize_Ram() -> void:
 		self.Clear_Data_Connected.connect(instance.Clear_Data_Connected)
 		self.Clear_Apps_Connected.connect(instance.Clear_Apps_Connected)
 		instance.Process_Completed.connect(Process_Completed)
+		instance.PatienceExplode.connect(ClearContext)
 		instance.scale.y = Calculate_Module_Size()
 		instance.position.x = 32
 		if i == 0:

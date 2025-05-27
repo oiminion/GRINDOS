@@ -1,8 +1,12 @@
 extends "res://Auxiliar/module.gd"
 
+class_name Process
+
 signal Process_Completed(value: int)
 
 signal Change_CPU(color: Color)
+
+signal PatienceExplode(color: Color)
 
 @export var can_change_CPU_color: bool = true
 
@@ -43,9 +47,9 @@ func Alocate_Space() -> void:
 		return
 	free = false
 	self.data_probability = randi_range(0,20)
-	self.max_patience = randi_range(75,150)
+	self.max_patience = randi_range(75,150) * 2
 	self.patience = max_patience
-	self.conclude = randi_range(segmentation_size/10,segmentation_size)
+	self.conclude = randi_range(segmentation_size/10,segmentation_size)*2
 	self.progress = 0
 	color = Global.get_Process_Color()
 	$Control/progress_bar.self_modulate = color
@@ -104,8 +108,9 @@ func _on_cycle_timer_timeout() -> void:#WIP
 	if patience <= 0 and not free:
 		Global.points -= Global.points/10
 		blocked = false
+		PatienceExplode.emit(color)
 		Free_Space()
-	#patience -= 1 WIP
+	patience -= 1
 	if data_connected:
 		Unblock()
 	if cpu_connected and not free:

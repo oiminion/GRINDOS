@@ -19,6 +19,12 @@ func Free_Count() -> int:
 func Calculate_Context_Size() -> float:
 	return ($Background.scale.y / Global.SO_max_capacity) * segmentation_size * 2
 
+func Clear_Context(color: Color) -> void:
+	for _i in self.get_children():
+		if _i is Context:
+			if (_i.color == color):
+				_i.clearColor()
+
 func Update_Segmentation_Quantity() -> void:
 	segmentation_quantity = Global.SO_max_capacity / segmentation_size
 

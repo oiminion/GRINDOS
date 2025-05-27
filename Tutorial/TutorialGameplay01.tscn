@@ -28,8 +28,6 @@ position = Vector2(166, 309)
 
 [node name="RAM_fixoTutorial" parent="." instance=ExtResource("6_jp4gk")]
 position = Vector2(429, 192)
-segmentation_quantity = 0
-segmentation = ""
 
 [node name="Disco" type="Node" parent="."]
 

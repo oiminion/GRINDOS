@@ -15,16 +15,35 @@ func Change_CPU_Color(cpu_var: Module, process: Module) -> void:
 		cpu_var.clear_Context()
 
 func Connect_CPU(module: Module) -> void:
+	if module is Context or Selected is Context:
+		if(module is Context):
+			_on_ram_fixo_context_selected(module)
+		else:
+			_on_ram_fixo_context_selected(Selected)
+		return
 	$RAM_fixo.Clear_CPU_Connected.emit()
 	$CableCPU.Connect_Module(Selected, module)
 	if module == $CPU:
-		if module.color == Color.WHITE or module.color == Selected.color:
+		if (module.color == Color.WHITE and Selected.can_change_CPU_color) or module.color == Selected.color:
 			Selected.Connect_CPU()
-			Change_CPU_Color(module, Selected)
+			if Selected.can_change_CPU_color:
+				Change_CPU_Color(module, Selected)
+				Selected.can_change_CPU_color = false
+	elif Selected is Context:
+		$RAM_fixo.Clear_CPU_Connected.emit()
+		if $CPU.color == Color.WHITE and Selected.color != Color.WHITE:
+			$CPU.connect_ContextColor(Selected.color)
+			Selected.clearColor()
+		elif $CPU.color != Color.WHITE and Selected.color == Color.WHITE:
+			Selected.changeColor($CPU.color)
+			$CPU.clear_Context()
+		$CableCPU.Connect_Context($CPU,Selected)
 	else:
-		if Selected.color == Color.WHITE or module.color == Selected.color:
+		if (Selected.color == Color.WHITE and module.can_change_CPU_color) or module.color == Selected.color:
 			module.Connect_CPU()
-			Change_CPU_Color(Selected, module)
+			if module.can_change_CPU_color: 
+				Change_CPU_Color(Selected, module)
+				module.can_change_CPU_color = false
 	Selected = null
 
 func Connect_Disk_Cable(module: Module) -> void:
@@ -87,26 +106,27 @@ func _on_disk_so_selected(_module: Module) -> void:
 
 
 func _on_ram_fixo_context_selected(context: Context) -> void:
+	if not Selected == null:
+		print(Selected.get_parent().get_class())
 	if Selected == null:
 		Selected = context
+	elif Selected is Process:
+		Selected = context
+		$RAM_fixo.Clear_CPU_Connected.emit()
 	elif Selected == $CPU:
 		$RAM_fixo.Clear_CPU_Connected.emit()
-		print($CPU.color)
-		print(context.context_color)
-		if $CPU.color == Color.WHITE and context.context_color != Color.WHITE:
-			$CPU.connect_ContextColor(context.context_color)
+		if $CPU.color == Color.WHITE and context.color != Color.WHITE:
+			$CPU.connect_ContextColor(context.color)
 			context.clearColor()
-			print("1")
-		elif $CPU.color != Color.WHITE and context.context_color == Color.WHITE:
+		elif $CPU.color != Color.WHITE and context.color == Color.WHITE:
 			context.changeColor($CPU.color)
 			$CPU.clear_Context()
-			print("2")
-		print("AAAAAAAA")
 		$CableCPU.Connect_Context($CPU,context)
+		Selected = null
+		
 
 func _on_ram_fixo_completed_process() -> void:
 	$CPU.clear_Context()
 
 func _on_ram_fixo_change_cpu_color(color: Color) -> void:
-	print("BBBBBBBBB")
 	$CPU.connect_ContextColor(color)
