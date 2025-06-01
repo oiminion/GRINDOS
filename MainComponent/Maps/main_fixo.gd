@@ -75,6 +75,8 @@ func _on_cpu_button_pressed(module: Module) -> void:
 		Selected = null
 	elif Selected.get_parent() != module.get_parent():
 		Connect_CPU(module)
+	else:
+		Selected = null
 
 func _on_ram_fixo_module_selected(module: Module) -> void:
 	if Selected == null:
@@ -86,6 +88,8 @@ func _on_ram_fixo_module_selected(module: Module) -> void:
 			Connect_Disk_Data(module)
 		elif Selected == $Disk/Apps:
 			Connect_Disk_Apps(module)
+	else:
+		Selected = null
 
 func _on_disk_data_selected(module: Module) -> void:
 	if Selected == null:
@@ -94,6 +98,8 @@ func _on_disk_data_selected(module: Module) -> void:
 		Selected = null
 	elif Selected.get_parent() != module.get_parent():
 		Connect_Disk_Data(module)
+	else:
+		Selected = null
 
 func _on_disk_apss_selected(module: Module) -> void:
 	if Selected == null:
@@ -102,14 +108,14 @@ func _on_disk_apss_selected(module: Module) -> void:
 		Selected = null
 	elif Selected.get_parent() != module.get_parent():
 		Connect_Disk_Apps(module)
+	else:
+		Selected = null
 
 func _on_disk_so_selected(_module: Module) -> void:
 	pass
 
 
 func _on_ram_fixo_context_selected(context: Context) -> void:
-	if not Selected == null:
-		print(Selected.name)
 	if Selected == null:
 		Selected = context
 	elif Selected == $CPU or Selected is Context:
@@ -121,6 +127,8 @@ func _on_ram_fixo_context_selected(context: Context) -> void:
 			context.changeColor($CPU.color)
 			$CPU.clear_Context()
 		$CableCPU.Connect_Context($CPU,context)
+		Selected = null
+	else:
 		Selected = null
 		
 
@@ -134,3 +142,7 @@ func _on_ram_fixo_change_cpu_color(color: Color) -> void:
 func _on_ram_fixo_clear_context(color: Color) -> void:
 	if $CPU.color == color:
 		$CPU.clear_Context()
+
+
+func _on_ram_fixo_created_interruption() -> void:
+	interruption = true

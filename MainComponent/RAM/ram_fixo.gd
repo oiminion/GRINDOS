@@ -15,6 +15,8 @@ signal Clear_Context(color: Color)
 
 var process_scene: PackedScene = preload("res://Auxiliar/process.tscn")
 
+signal Created_Interruption
+
 func Change_CPU(color: Color) -> void:
 	Change_CPU_Color.emit(color)
 
@@ -43,6 +45,9 @@ func ClearContext(color: Color) -> void:
 	$so_space.Clear_Context(color)
 	Clear_Context.emit(color)
 
+func AnnounceInterruption() -> void:
+	Created_Interruption.emit()
+
 func Initialize_Ram() -> void:
 	var off_set: int = Calculate_Module_Size() * 196
 	for i in segmentation_quantity:
@@ -52,6 +57,7 @@ func Initialize_Ram() -> void:
 		self.Clear_CPU_Connected.connect(instance.Clear_CPU_Connected)
 		self.Clear_Data_Connected.connect(instance.Clear_Data_Connected)
 		self.Clear_Apps_Connected.connect(instance.Clear_Apps_Connected)
+		instance.CreatedInterruption.connect(AnnounceInterruption)
 		instance.Process_Completed.connect(Process_Completed)
 		instance.PatienceExplode.connect(ClearContext)
 		instance.scale.y = Calculate_Module_Size()

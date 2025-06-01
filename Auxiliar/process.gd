@@ -62,7 +62,7 @@ func Alocate_Space() -> void:
 	$Control/patience_bar.visible = true
 	$Control/progress_bar.visible = true
 	
-	if can_interrupt and randi_range(0,100) <= 10:
+	if can_interrupt and randi_range(0,100) <= 5:
 		CreatedInterruption.emit()
 		is_interruption = true
 	
@@ -112,7 +112,7 @@ func Unblock() -> void:
 	blocked = false
 
 func _on_cycle_timer_timeout() -> void:#WIP
-	if not blocked:
+	if not blocked:#A11 e 12 connectado A4 e 5
 		var sb = StyleBoxFlat.new()
 		$Control/progress_bar.add_theme_stylebox_override("fill", sb)
 		sb.bg_color = Color("ffffff")
