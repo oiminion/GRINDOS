@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dllvjfxm4vvj7"]
+[gd_scene load_steps=4 format=3 uid="uid://dllvjfxm4vvj7"]
 
 [ext_resource type="PackedScene" uid="uid://dffwl868m3vwl" path="res://MainComponent/RAM/ram.tscn" id="1_da8ph"]
 [ext_resource type="Script" uid="uid://dbpc70ebwuecr" path="res://Tutorial/ram_fixo_tutorial.gd" id="2_e0uke"]
 [ext_resource type="PackedScene" uid="uid://b6304wc3mfenj" path="res://MainComponent/disk/so_space.tscn" id="3_860i2"]
-[ext_resource type="PackedScene" uid="uid://ckwaaevifw3i3" path="res://Tutorial/processTutorial.tscn" id="3_da8ph"]
 
 [node name="RAM_fixoTutorial" instance=ExtResource("1_da8ph")]
 script = ExtResource("2_e0uke")
@@ -11,8 +10,5 @@ segmentation_quantity = 0
 
 [node name="so_space" parent="." index="1" instance=ExtResource("3_860i2")]
 position = Vector2(0, 192)
-
-[node name="ProcessTutorial" parent="." index="2" instance=ExtResource("3_da8ph")]
-position = Vector2(33, -57)
 
 [connection signal="Context_Selected" from="so_space" to="." method="_on_so_space_context_selected"]

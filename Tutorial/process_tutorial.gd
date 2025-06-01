@@ -107,7 +107,7 @@ func _on_cycle_timer_timeout() -> void:#WIP
 		$Control/patience_bar.value = patience
 		$Control/progress_bar.value = progress
 		if progress >= conclude:
-			var aux: int = 100
+			var aux: int = 0
 			if aux < data_probability and not blocked:
 				blocked = true
 				var sb = StyleBoxFlat.new()
