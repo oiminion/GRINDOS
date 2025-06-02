@@ -8,7 +8,7 @@ extends Node2D
 		segmentation_size = value
 		$RAM_fixo.Update_Segmentation_Quantity()
 
-@export var interruption: bool = false
+@export var interruption: int = 0
 
 func Change_CPU_Color(cpu_var: Module, process: Module) -> void:
 	if process.color != Color.WHITE:
@@ -17,7 +17,7 @@ func Change_CPU_Color(cpu_var: Module, process: Module) -> void:
 		cpu_var.clear_Context()
 
 func Connect_CPU(module: Module) -> void:
-	if not interruption:
+	if not (interruption > 0):
 		if module is Context or Selected is Context:
 			if(module is Context):
 				_on_ram_fixo_context_selected(module)
@@ -161,4 +161,11 @@ func _on_ram_fixo_clear_context(color: Color) -> void:
 
 
 func _on_ram_fixo_created_interruption() -> void:
-	interruption = true
+	interruption += 1
+	$RAM_fixo.Lock_Unlock()
+
+
+func _on_ram_fixo_interruption_ended() -> void:
+	interruption -= 1
+	if interruption == 0:
+		$RAM_fixo.Unlock_Process()

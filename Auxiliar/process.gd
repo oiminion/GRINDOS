@@ -8,6 +8,8 @@ signal Change_CPU(color: Color)
 
 signal PatienceExplode(color: Color)
 
+signal InterruptionEnded
+
 signal CreatedInterruption
 
 @export var can_interrupt: bool = false
@@ -31,6 +33,12 @@ signal CreatedInterruption
 
 var cpu_color: Color = Color.WHITE
 var color: Color = Color.WHITE
+
+func Lock_Unlock_Process() -> void:
+	$Background/Locked.visible = not is_interruption
+
+func Unlock_Process() -> void:
+	$Background/Locked.visible = false
 
 func Update_Max_Ui() -> void:
 	$Control/patience_bar.max_value = max_patience
@@ -57,7 +65,6 @@ func _ready():
 	free = true
 	is_interruption = false
 	can_change_CPU_color = true
-	print("V2")
 
 func Alocate_Space() -> void:
 	if not free:
@@ -75,14 +82,17 @@ func Alocate_Space() -> void:
 	Update_Max_Ui()
 	$Control/patience_bar.visible = true
 	$Control/progress_bar.visible = true
+	#WIP
 	if Global.unlocked_upgrades["interruption_upgrade"] and randi_range(0,100) <= 5:
-		CreatedInterruption.emit()
 		is_interruption = true
+		CreatedInterruption.emit()
 	
 	if cpu_connected and can_change_CPU_color:
 		Change_CPU.emit(color)
 		can_change_CPU_color = false
-		print("F1")
+		
+	if get_parent().get_parent().interruption > 0:
+		Lock_Unlock_Process()
 
 func Clear_Data_Connected() -> void:
 	data_connected = false
@@ -94,7 +104,6 @@ func Clear_Apps_Connected() -> void:
 
 func Clear_CPU_Connected() -> void:
 	cpu_connected = false
-	print("CPU Disconnect")
 
 func Free_Space() -> void:
 	if free:
@@ -113,7 +122,6 @@ func Free_Space() -> void:
 	free = true
 	is_interruption = false
 	can_change_CPU_color = true
-	print("V1")
 
 func Connect_Data() -> void:
 	data_connected = true
@@ -123,7 +131,6 @@ func Connect_Apps() -> void:
 
 func Connect_CPU() -> void:
 	cpu_connected = true
-	print("CPU Connect")
 
 func Unblock() -> void:
 	blocked = false
@@ -137,6 +144,8 @@ func _on_cycle_timer_timeout() -> void:#WIP
 		Global.points -= Global.points/10
 		blocked = false
 		PatienceExplode.emit(color)
+		if is_interruption:
+			InterruptionEnded.emit()
 		Free_Space()
 	patience -= 1
 	if data_connected:
@@ -145,7 +154,6 @@ func _on_cycle_timer_timeout() -> void:#WIP
 		if can_change_CPU_color:
 			Change_CPU.emit(color)
 			can_change_CPU_color = false
-			print("F2")
 		if not blocked:
 			patience = max_patience
 		progress += 1 
@@ -161,7 +169,12 @@ func _on_cycle_timer_timeout() -> void:#WIP
 			if data_connected:
 				blocked = false
 			if not blocked and not free:
-				Process_Completed.emit(((conclude*10)/max_patience))
+				if is_interruption:
+					Process_Completed.emit(conclude/max_patience)
+				else:
+					Process_Completed.emit(((conclude*10)/max_patience))
+				if is_interruption:
+					InterruptionEnded.emit()
 				Free_Space()
 			if free and apps_connected:
 				Alocate_Space()

@@ -13,9 +13,16 @@ signal Completed_Process
 signal Context_Selected(context:Context)
 signal Clear_Context(color: Color)
 
+signal Lock_Unlock_Process
+signal InterruptionEnded
+signal Unlock_Process_Unity
+
 var process_scene: PackedScene = preload("res://Auxiliar/process.tscn")
 
 signal Created_Interruption
+
+func Lock_Unlock() -> void:
+	Lock_Unlock_Process.emit()
 
 func Change_CPU(color: Color) -> void:
 	Change_CPU_Color.emit(color)
@@ -48,6 +55,12 @@ func ClearContext(color: Color) -> void:
 func AnnounceInterruption() -> void:
 	Created_Interruption.emit()
 
+func InterruptionCompleted() -> void:
+	InterruptionEnded.emit()
+	
+func Unlock_Process() -> void:
+	Unlock_Process_Unity.emit()
+
 func Initialize_Ram() -> void:
 	var off_set: int = Calculate_Module_Size() * 196
 	for i in segmentation_quantity:
@@ -57,6 +70,9 @@ func Initialize_Ram() -> void:
 		self.Clear_CPU_Connected.connect(instance.Clear_CPU_Connected)
 		self.Clear_Data_Connected.connect(instance.Clear_Data_Connected)
 		self.Clear_Apps_Connected.connect(instance.Clear_Apps_Connected)
+		self.Lock_Unlock_Process.connect(instance.Lock_Unlock_Process)
+		self.Unlock_Process_Unity.connect(instance.Unlock_Process)
+		instance.InterruptionEnded.connect(InterruptionCompleted)
 		instance.CreatedInterruption.connect(AnnounceInterruption)
 		instance.Process_Completed.connect(Process_Completed)
 		instance.PatienceExplode.connect(ClearContext)

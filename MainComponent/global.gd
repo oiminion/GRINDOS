@@ -35,8 +35,11 @@ var SO_max_capacity: float = 10 * (RAM_max_capacity/50)
 var disk_max_capacity: float = 200
 
 var unlocked_upgrades: Dictionary = {
-	"interruption_upgrade": false
+	"interruption": false
 }
+
+func Unlock_Upgrade(upgrade_name: String) -> void:
+	unlocked_upgrades[upgrade_name] = true
 
 func get_Process_Color() -> Color:
 	var aux :int = randi_range(0,9)
