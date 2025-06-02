@@ -45,11 +45,25 @@ func Change_Progress_Bar_Color(hex_code: String) -> void:
 func _ready():
 	self.button_pressed.connect(get_parent().Process_Selected)
 	self.Change_CPU.connect(get_parent().Change_CPU)
+	self.data_probability = 0
+	self.patience = 0
+	self.progress = 0
+	self.conclude = 0
+	color = Color.WHITE
+	$Control/patience_bar.value = patience
+	$Control/progress_bar.value = progress
+	$Control/patience_bar.visible = false
+	$Control/progress_bar.visible = false
+	free = true
+	is_interruption = false
+	can_change_CPU_color = true
+	print("V2")
 
 func Alocate_Space() -> void:
 	if not free:
 		print("tried to alocate alocated space")
 		return
+	can_change_CPU_color = true
 	free = false
 	self.data_probability = randi_range(0,20)
 	self.max_patience = randi_range(100,150) * 2
@@ -68,6 +82,7 @@ func Alocate_Space() -> void:
 	if cpu_connected and can_change_CPU_color:
 		Change_CPU.emit(color)
 		can_change_CPU_color = false
+		print("F1")
 
 func Clear_Data_Connected() -> void:
 	data_connected = false
@@ -79,9 +94,9 @@ func Clear_Apps_Connected() -> void:
 
 func Clear_CPU_Connected() -> void:
 	cpu_connected = false
+	print("CPU Disconnect")
 
 func Free_Space() -> void:
-	can_change_CPU_color = true
 	if free:
 		print("tried to free free space")
 		return
@@ -97,6 +112,8 @@ func Free_Space() -> void:
 	$Control/progress_bar.visible = false
 	free = true
 	is_interruption = false
+	can_change_CPU_color = true
+	print("V1")
 
 func Connect_Data() -> void:
 	data_connected = true
@@ -106,12 +123,13 @@ func Connect_Apps() -> void:
 
 func Connect_CPU() -> void:
 	cpu_connected = true
+	print("CPU Connect")
 
 func Unblock() -> void:
 	blocked = false
 
 func _on_cycle_timer_timeout() -> void:#WIP
-	if not blocked:#A11 e 12 connectado A4 e 5
+	if not blocked:
 		var sb = StyleBoxFlat.new()
 		$Control/progress_bar.add_theme_stylebox_override("fill", sb)
 		sb.bg_color = Color("ffffff")
@@ -124,9 +142,13 @@ func _on_cycle_timer_timeout() -> void:#WIP
 	if data_connected:
 		Unblock()
 	if cpu_connected and not free:
+		if can_change_CPU_color:
+			Change_CPU.emit(color)
+			can_change_CPU_color = false
+			print("F2")
 		if not blocked:
 			patience = max_patience
-		progress += 1
+		progress += 1 
 		$Control/patience_bar.value = patience
 		$Control/progress_bar.value = progress
 		if progress >= conclude:
