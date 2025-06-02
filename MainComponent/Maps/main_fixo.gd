@@ -17,35 +17,51 @@ func Change_CPU_Color(cpu_var: Module, process: Module) -> void:
 		cpu_var.clear_Context()
 
 func Connect_CPU(module: Module) -> void:
-	if module is Context or Selected is Context:
-		if(module is Context):
-			_on_ram_fixo_context_selected(module)
-		else:
-			_on_ram_fixo_context_selected(Selected)
-		return
-	$RAM_fixo.Clear_CPU_Connected.emit()
-	$CableCPU.Connect_Module(Selected, module)
-	if module == $CPU:
-		if (module.color == Color.WHITE and Selected.can_change_CPU_color) or module.color == Selected.color:
-			Selected.Connect_CPU()
-			if Selected.can_change_CPU_color:
-				Change_CPU_Color(module, Selected)
-				Selected.can_change_CPU_color = false
-	elif Selected is Context:
+	if not interruption:
+		if module is Context or Selected is Context:
+			if(module is Context):
+				_on_ram_fixo_context_selected(module)
+			else:
+				_on_ram_fixo_context_selected(Selected)
+			return
 		$RAM_fixo.Clear_CPU_Connected.emit()
-		if $CPU.color == Color.WHITE and Selected.color != Color.WHITE:
-			$CPU.connect_ContextColor(Selected.color)
-			Selected.clearColor()
-		elif $CPU.color != Color.WHITE and Selected.color == Color.WHITE:
-			Selected.changeColor($CPU.color)
-			$CPU.clear_Context()
-		$CableCPU.Connect_Context($CPU,Selected)
+		$CableCPU.Connect_Module(Selected, module)
+		if module == $CPU:
+			if (module.color == Color.WHITE and Selected.can_change_CPU_color) or module.color == Selected.color:
+				Selected.Connect_CPU()
+				if Selected.can_change_CPU_color:
+					Change_CPU_Color(module, Selected)
+					Selected.can_change_CPU_color = false
+		elif Selected is Context:
+			$RAM_fixo.Clear_CPU_Connected.emit()
+			if $CPU.color == Color.WHITE and Selected.color != Color.WHITE:
+				$CPU.connect_ContextColor(Selected.color)
+				Selected.clearColor()
+			elif $CPU.color != Color.WHITE and Selected.color == Color.WHITE:
+				Selected.changeColor($CPU.color)
+				$CPU.clear_Context()
+			$CableCPU.Connect_Context($CPU,Selected)
+		else:
+			if (Selected.color == Color.WHITE and module.can_change_CPU_color) or module.color == Selected.color:
+				module.Connect_CPU()
+				if module.can_change_CPU_color: 
+					Change_CPU_Color(Selected, module)
+					module.can_change_CPU_color = false
 	else:
-		if (Selected.color == Color.WHITE and module.can_change_CPU_color) or module.color == Selected.color:
-			module.Connect_CPU()
-			if module.can_change_CPU_color: 
-				Change_CPU_Color(Selected, module)
-				module.can_change_CPU_color = false
+		if module == $CPU:
+			if Selected.is_interruption:
+				if (module.color == Color.WHITE and Selected.can_change_CPU_color) or module.color == Selected.color:
+					Selected.Connect_CPU()
+					if Selected.can_change_CPU_color:
+						Change_CPU_Color(module, Selected)
+						Selected.can_change_CPU_color = false
+		else:
+			if module.is_interruption:
+				if (Selected.color == Color.WHITE and module.can_change_CPU_color) or module.color == Selected.color:
+					module.Connect_CPU()
+					if module.can_change_CPU_color: 
+						Change_CPU_Color(Selected, module)
+						module.can_change_CPU_color = false
 	Selected = null
 
 func Connect_Disk_Cable(module: Module) -> void:

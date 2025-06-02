@@ -61,8 +61,7 @@ func Alocate_Space() -> void:
 	Update_Max_Ui()
 	$Control/patience_bar.visible = true
 	$Control/progress_bar.visible = true
-	
-	if can_interrupt and randi_range(0,100) <= 5:
+	if Global.unlocked_upgrades["interruption_upgrade"] and randi_range(0,100) <= 5:
 		CreatedInterruption.emit()
 		is_interruption = true
 	
