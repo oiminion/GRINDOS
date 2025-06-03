@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c52e2tk2cddrn"]
+[gd_scene load_steps=2 format=3 uid="uid://c52e2tk2cddrn"]
 
 [ext_resource type="Script" uid="uid://guvrhe1raxm1" path="res://MainComponent/Maps/shop.gd" id="1_4jrpy"]
-[ext_resource type="PackedScene" uid="uid://dvo4f1mea6om3" path="res://Auxiliar/Shop_slot.tscn" id="2_hqp5m"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -20,32 +19,3 @@ anchor_right = 1.0
 offset_left = -300.0
 offset_bottom = 650.0
 grow_horizontal = 0
-
-[node name="Panel2" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 75)
-layout_mode = 2
-
-[node name="Panel3" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 75)
-layout_mode = 2
-
-[node name="Panel4" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 75)
-layout_mode = 2
-
-[node name="Panel5" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 75)
-layout_mode = 2
-
-[node name="Panel6" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 75)
-layout_mode = 2
-
-[node name="Panel7" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 75)
-layout_mode = 2
-
-[node name="Panel" parent="VBoxContainer" instance=ExtResource("2_hqp5m")]
-layout_mode = 2
-
-[connection signal="Unlocked" from="VBoxContainer/Panel" to="." method="_on_panel_unlocked"]

@@ -35,7 +35,7 @@ var SO_max_capacity: float = 10 * (RAM_max_capacity/50)
 var disk_max_capacity: float = 200
 
 var unlocked_upgrades: Dictionary = {
-	"interruption": false
+	"interrupção": false
 }
 
 func Unlock_Upgrade(upgrade_name: String) -> void:

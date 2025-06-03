@@ -6,6 +6,7 @@
 custom_minimum_size = Vector2(0, 75)
 offset_right = 189.0
 offset_bottom = 75.0
+mouse_filter = 2
 script = ExtResource("1_fb7jp")
 
 [node name="Button2" type="Button" parent="."]
@@ -22,11 +23,24 @@ offset_left = 4.0
 offset_top = 5.0
 offset_right = 184.0
 offset_bottom = 70.0
+mouse_filter = 2
 text = "aaaaaaaaaaaaaaaa"
 fit_content = true
 scroll_active = false
 tab_size = 1
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Price" type="RichTextLabel" parent="."]
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 166.0
+offset_bottom = 31.0
+mouse_filter = 2
+text = "123"
+fit_content = true
+scroll_active = false
+tab_size = 1
 vertical_alignment = 1
 
 [connection signal="button_down" from="Button2" to="." method="_on_button_2_button_down"]

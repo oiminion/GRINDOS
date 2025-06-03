@@ -83,7 +83,7 @@ func Alocate_Space() -> void:
 	$Control/patience_bar.visible = true
 	$Control/progress_bar.visible = true
 	#WIP
-	if Global.unlocked_upgrades["interruption_upgrade"] and randi_range(0,100) <= 5:
+	if Global.unlocked_upgrades["interrupção"] and randi_range(0,100) <= 5:
 		is_interruption = true
 		CreatedInterruption.emit()
 	
