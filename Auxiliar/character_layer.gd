@@ -85,6 +85,8 @@ Aos quatro anos de idade, Edson e sua família mudaram-se para Bauru, em São Pa
 "batata"]
 	setStringArray(array)
 
+func changeName(new_name: String) -> void:
+	$Panel/Nome.text = new_name
 
 func _on_skip_button_button_down() -> void:
 	skipText()

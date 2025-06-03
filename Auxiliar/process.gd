@@ -150,7 +150,9 @@ func _on_cycle_timer_timeout() -> void:#WIP
 	patience -= 1
 	if data_connected:
 		Unblock()
-	if cpu_connected and not free:
+	var A: bool = get_parent().get_parent().interruption
+	var B: bool = is_interruption
+	if cpu_connected and not free and not (A and not B) or (not A and B):
 		if can_change_CPU_color:
 			Change_CPU.emit(color)
 			can_change_CPU_color = false

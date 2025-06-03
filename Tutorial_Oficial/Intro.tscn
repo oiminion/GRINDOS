@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnfnbvefmouu2"]
+
+[ext_resource type="Script" uid="uid://bma3t4tc4q4bg" path="res://Tutorial_Oficial/intro.gd" id="1_xha2e"]
+
+[node name="Panel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xha2e")
+
+[node name="NextButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = -4.0
+mouse_filter = 2
+text = "AAAAAAAAA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+
+[connection signal="button_down" from="NextButton" to="." method="_on_next_button_button_down"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

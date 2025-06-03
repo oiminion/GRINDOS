@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgee1qaqbkm76"]
+
+[ext_resource type="Script" uid="uid://imljajt35a76" path="res://Tutorial_Oficial/tutorial_oficial.gd" id="1_gxmri"]
+[ext_resource type="PackedScene" uid="uid://brm4quti8o25r" path="res://Auxiliar/character_layer.tscn" id="1_oi1od"]
+
+[node name="Tutorial_Oficial" type="Node2D"]
+script = ExtResource("1_gxmri")
+
+[node name="character_layer" parent="." instance=ExtResource("1_oi1od")]
+visible = false
+
+[connection signal="finished_talk" from="character_layer" to="." method="_on_character_layer_finished_talk"]
