@@ -17,6 +17,6 @@ func updateNothing() -> void:
 	self.visible = false
 
 func _on_button_2_button_down() -> void:
-	if Global.points >= price or true:
+	if Global.points >= price:
 		Global.points -= price
 		Unlocked.emit(self)

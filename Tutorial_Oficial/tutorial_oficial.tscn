@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://brm4quti8o25r" path="res://Auxiliar/character_layer.tscn" id="1_oi1od"]
 
 [node name="Tutorial_Oficial" type="Node2D"]
+position = Vector2(0, 2)
 script = ExtResource("1_gxmri")
 
 [node name="character_layer" parent="." instance=ExtResource("1_oi1od")]

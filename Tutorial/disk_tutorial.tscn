@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dt3xkmik8vgs1"]
+
+[ext_resource type="Texture2D" uid="uid://bmgq56c4breod" path="res://img/White_square.png" id="1_cg5aq"]
+[ext_resource type="PackedScene" uid="uid://dtipmjh0qvci2" path="res://MainComponent/disk/data.tscn" id="2_svuxj"]
+[ext_resource type="PackedScene" uid="uid://5gbqn31gwiws" path="res://MainComponent/disk/apps.tscn" id="3_wpmg0"]
+[ext_resource type="PackedScene" uid="uid://devgsy5r0vacb" path="res://MainComponent/disk/so.tscn" id="4_1wpjg"]
+
+[node name="Disk_tutorial" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.2, 0.2, 1)
+position = Vector2(32, 128)
+scale = Vector2(1, 4)
+texture = ExtResource("1_cg5aq")
+
+[node name="Data" parent="." instance=ExtResource("2_svuxj")]
+
+[node name="Apps" parent="." instance=ExtResource("3_wpmg0")]
+
+[node name="SO" parent="." instance=ExtResource("4_1wpjg")]

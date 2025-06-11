@@ -74,6 +74,7 @@ grow_horizontal = 0
 text = "Pular"
 
 [node name="Nome" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
 offset_left = 14.0
 offset_top = 3.0
 offset_right = 661.0

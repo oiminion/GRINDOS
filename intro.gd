@@ -42,7 +42,6 @@ func _on_timer_timeout() -> void:
 		can_go_next = true
 
 func _on_next_button_button_down() -> void:
-	print("AAAAAAAAA")
 	if can_go_next:
 		nextText()
 	else:

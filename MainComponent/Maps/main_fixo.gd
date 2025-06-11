@@ -62,6 +62,7 @@ func Connect_CPU(module: Module) -> void:
 					if module.can_change_CPU_color: 
 						Change_CPU_Color(Selected, module)
 						module.can_change_CPU_color = false
+		$CableCPU.Connect_Module(Selected, module)
 	Selected = null
 
 func Connect_Disk_Cable(module: Module) -> void:

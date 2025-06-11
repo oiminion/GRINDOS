@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://drvssko2oi7j1"]
+
+[ext_resource type="Texture2D" uid="uid://bmgq56c4breod" path="res://img/White_square.png" id="1_halty"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x84df"]
+size = Vector2(64, 64)
+
+[node name="Dados_Tutorial" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x84df")
+
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(0.533333, 0, 0, 1)
+texture = ExtResource("1_halty")
+
+[node name="Control" type="Control" parent="Background"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+
+[node name="Button" type="Button" parent="Background/Control"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "Dados"
+flat = true

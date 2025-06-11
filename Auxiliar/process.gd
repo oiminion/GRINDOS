@@ -35,6 +35,7 @@ var cpu_color: Color = Color.WHITE
 var color: Color = Color.WHITE
 
 func Lock_Unlock_Process() -> void:
+	patience += (max_patience - patience) / 2
 	$Background/Locked.visible = not is_interruption
 
 func Unlock_Process() -> void:
@@ -73,7 +74,7 @@ func Alocate_Space() -> void:
 	can_change_CPU_color = true
 	free = false
 	self.data_probability = randi_range(0,20)
-	self.max_patience = randi_range(100,150) * 2
+	self.max_patience = randi_range(150,200) * Global.patience_upgrade
 	self.patience = max_patience
 	self.conclude = randi_range(segmentation_size/5,segmentation_size)*2
 	self.progress = 0

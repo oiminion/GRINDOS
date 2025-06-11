@@ -35,8 +35,20 @@ var SO_max_capacity: float = 10 * (RAM_max_capacity/50)
 var disk_max_capacity: float = 200
 
 var unlocked_upgrades: Dictionary = {
-	"interrupção": false
+	"interrupção": false,
+	"aumentar paciencia": false
 }
+
+var patience_upgrade :float = 2.5:
+	get:
+		if(unlocked_upgrades["aumentar paciencia"] == true):
+			return patience_upgrade + 1
+		
+		return patience_upgrade
+	set(value):
+		points = value
+		Points_Changed.emit()
+
 
 func Unlock_Upgrade(upgrade_name: String) -> void:
 	unlocked_upgrades[upgrade_name] = true

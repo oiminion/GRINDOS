@@ -12,11 +12,17 @@ func displayNothing(display: Upgrade) -> void:
 	display.upgrade_name = ""
 	display.updateNothing()
 
+#mudar os upgrades em global
+
+func maxPatienceUpgrade(display: Upgrade) -> void:
+	displayUpgrade(display,"aumentar paciencia",50)
+
 func interruptionUpgrade(display: Upgrade) -> void:
 	displayUpgrade(display,"interrupção",10)
 
 var Upgrades: Array[Callable] = [
-	interruptionUpgrade
+	interruptionUpgrade,
+	maxPatienceUpgrade
 ]
 
 var Displays: Array[Upgrade] = []

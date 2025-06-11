@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://devgsy5r0vacb"]
+[gd_scene load_steps=3 format=3 uid="uid://devgsy5r0vacb"]
 
 [ext_resource type="PackedScene" uid="uid://dmul4d8g5t4s" path="res://Auxiliar/module.tscn" id="1_fysr4"]
+[ext_resource type="Script" uid="uid://bfqw0gct618mm" path="res://MainComponent/disk/so.gd" id="2_pvofg"]
 
 [node name="SO" instance=ExtResource("1_fysr4")]
+script = ExtResource("2_pvofg")
 
 [node name="Background" parent="." index="1"]
 modulate = Color(0, 0, 0.533333, 1)

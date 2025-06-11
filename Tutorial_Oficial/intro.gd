@@ -15,7 +15,6 @@ func setStringArray(strings :Array) -> void:
 func nextText() -> void:
 	page += 1
 	if page == string_array.size():
-		print("BBBBBBBBB")
 		finished_intro.emit()
 		get_tree().change_scene_to_file("res://Tutorial_Oficial/tutorial_oficial.tscn")
 	elif can_go_next:
@@ -42,7 +41,6 @@ func _on_timer_timeout() -> void:
 		can_go_next = true
 
 func _on_next_button_button_down() -> void:
-	print("AAAAAAAAA")
 	if can_go_next:
 		nextText()
 	else:
